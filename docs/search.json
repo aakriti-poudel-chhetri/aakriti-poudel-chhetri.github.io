@@ -1,16 +1,16 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Aakriti Poudel",
     "section": "",
     "text": "Hi! I am Aakriti. I am an Environmental Professional advancing toward a specialization in data science. My work focuses on the connection between environmental sustainability and communication, and research aimed at reducing our environmental footprint. When I am not working, I enjoy cooking, reading fictional books and hiking. I love dogs and horses."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
   }
 ]
