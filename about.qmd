@@ -1,9 +1,3 @@
 ---
-title: "About"
+title: "Something about my project!"
 ---
-
-About this site
-
-```{r}
-1 + 1
-```

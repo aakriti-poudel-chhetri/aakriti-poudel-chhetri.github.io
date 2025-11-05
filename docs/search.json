@@ -1,16 +1,16 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "aakikip.github.io",
+    "title": "Aakriti Poudel",
     "section": "",
-    "text": "Hi! This is Aakriti."
+    "text": "Hi! I am Aakriti. I am an Environmental Professional advancing toward a specialization in data science. My work focuses on the connection between environmental sustainability and communication, and research aimed at reducing our environmental footprint. When I am not working, I enjoy cooking, reading fictional books and hiking. I love dogs and horses."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Under construction!",
+    "section": "",
+    "text": "this is an &lt;h1&gt; element\n\n# alternatively, you can write\n\nelements using markdown (# this is an\n\nelement)\n\nthis is an &lt;h1&gt; element of class title\n\n\nthis is a &lt;p&gt; element\n\n\nthis is a &lt;p&gt; element of class title\n\n\nthis is an &lt;h1&gt; element\n\n\nthis is an &lt;h1&gt; element of class title\n\n\nthis is a &lt;p&gt; element\n\n\nthis is a &lt;p&gt; element of class title\n\n— # three dashes is markdown syntax for creating a horizontal line across your page\n\nThis paragraph is orange.\n\n\nThis paragraph is centered.\n\n\nThis paragraph has no styling.\n\n\nThis level-2 header is centered"
   }
 ]
