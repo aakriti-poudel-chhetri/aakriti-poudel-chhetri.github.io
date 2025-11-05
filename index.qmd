@@ -12,7 +12,7 @@ about:
       target: _blank
     - text: GitHub
       icon: github
-      href: https://github.com/aakikip 
+      href: https://github.com/aakriti-poudel-chhetri
       target: _blank
     - text: Email
       icon: envelope
