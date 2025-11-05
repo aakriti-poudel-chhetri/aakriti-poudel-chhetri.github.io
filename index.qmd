@@ -1,5 +1,22 @@
 ---
-title: "aakikip.github.io"
+title: "Aakriti Poudel"
+image: aakriti.jpg
+about:
+  template: jolla
+  image-shape: rectangle
+  image-width: 17em
+  links:
+    - text: LinkedIn
+      icon: linkedin
+      href: https://www.linkedin.com/in/aakritipoudel/ 
+      target: _blank
+    - text: GitHub
+      icon: github
+      href: https://github.com/aakikip 
+      target: _blank
+    - text: Email
+      icon: envelope
+      href: aakritipoudel@ucsb.edu 
 ---
 
-Hi! This is Aakriti.
+Hi! I am Aakriti. I am an Environmental Professional advancing toward a specialization in data science. My work focuses on the connection between environmental sustainability and communication, and research aimed at reducing our environmental footprint. When I am not working, I enjoy cooking, reading fictional books and hiking. I love dogs and horses.
