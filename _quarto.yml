@@ -16,8 +16,8 @@ website:
         text: About
       - href: resources.qmd
         text: Resources
-      - href: Blog Posts
-        text: posts.qmd
+      - href: posts.qmd
+        text: Posts
       - icon: github
      
   page-footer: 
