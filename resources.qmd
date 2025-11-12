@@ -1,67 +1,31 @@
-<h1>this is an `<h1>` element</h1>
 
-\# alternatively, you can write
+<h1>this is an `<h1>` element</h1> # alternatively, you can write <h1> elements using markdown (`# this is an `<h1>` element`)
 
-<h1>
-
-elements using markdown (`# this is an`
-
-<h1>
-
-`element`)
-
-<h1 class="title">
-
-this is an `<h1>` element of class `title`
-
-</h1>
+<h1 class="title">this is an `<h1>` element of class `title`</h1>
 
 <p>this is a `<p>` element</p>
 
-<p class="title">
-
-this is a `<p>` element of class `title`
-
-</p>
+<p class="title">this is a `<p>` element of class `title`</p>
 
 ---
 title: "Under construction!"
 ---
+  
+<h1>this is an `<h1>` element</h1> 
 
-<h1>this is an `<h1>` element</h1>
-
-<h1 class="title">
-
-this is an `<h1>` element of class `title`
-
-</h1>
+<h1 class="title">this is an `<h1>` element of class `title`</h1>
 
 <p>this is a `<p>` element</p>
 
-<p class="title">
+<p class="title">this is a `<p>` element of class `title`</p>
+  
+--- # three dashes is markdown syntax for creating a horizontal line across your page
 
-this is a `<p>` element of class `title`
-
-</p>
-
---- \# three dashes is markdown syntax for creating a horizontal line across your page
-
-<p class="orange-text">
-
-This paragraph is orange.
-
-</p>
-
-<p class="center-text">
-
-This paragraph is centered.
-
-</p>
-
+<p class="orange-text">This paragraph is orange.</p>
+  
+<p class="center-text">This paragraph is centered.</p>
+  
 <p>This paragraph has no styling.</p>
 
-<h2 class="center-text">
+<h2 class="center-text">This level-2 header is centered</h2>
 
-This level-2 header is centered
-
-</h2>
