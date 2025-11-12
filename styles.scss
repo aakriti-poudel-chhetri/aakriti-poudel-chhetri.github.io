@@ -1,0 +1,40 @@
+/*-- scss:defaults --*/
+
+// import google font
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+
+// color
+$dark-green: #757B6D;
+$medium-green: #98A08D;
+$light-green: #D1D9CE;
+$cream: #FDFBF7;
+$terracotta: #BD6E53; 
+$violet: #846075;
+$dark-gray: #5A5856;
+$medium-gray: #64605f;
+
+// define quarto variables
+$body-bg: $light-green; 
+$navbar-bg: $cream;
+$navbar-bg: $dark-green;
+$navbar-hl: $terracotta;
+$link-color: $terracotta;
+
+/*-- scss:rules --*/
+
+h1, h2 {
+  letter-spacing: 0px;
+  font-weight: 700;
+}
+
+.title {
+  color: maroon;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.orange_text {
+  color: orange;
+}
