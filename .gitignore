@@ -6,3 +6,6 @@
 .quarto
 
 /.quarto/
+
+# eds220 blog post data folder
+posts/2025-12-eaton-palisades-fires-eji/data/*
