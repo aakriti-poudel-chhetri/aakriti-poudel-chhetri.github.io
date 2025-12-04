@@ -1,78 +1,58 @@
 ---
-title: "Visualizing fire scars through false color"
-description: |
+title: "Mapping 2025 Eaton and Palisades fires: Environmental and social impacts"
+description: "Examining the effects of the 2025 Eaton and Palisades fires on ecosystems and communities through remote sensing"
 author:
    - name: Aakriti Poudel
      url: https://aakriti-poudel-chhetri.github.io/
 date: 2025-11-29
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+jupyter: eds220-env
+python: /opt/anaconda3/bin/python
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-eaton-palisades-fires-eji/
 categories: [MEDS, geospatial, python, eji]
-jupyter: eds220-env
-image: eaton-palisades-fires-map.png
+image: eaton-palisades-fires.png
 draft: false
+bibliography: references.bib
 ---
 
-**Author:** Aakriti Poudel
+Link to GitHub repository: [Mapping environmental and social impacts of Eaton and Palisades fires](https://github.com/aakriti-poudel-chhetri/eds220-hwk4)
 
-**GitHub Repository:** <https://github.com/aakriti-poudel-chhetri/eds220-hwk4>
+## About this blog post
 
-## 1. About this notebook
+The Eaton and Palisades fires, which ignited almost simultaneously in early January 2025, showed not only the ecological vulnerability of Los Angeles County’s foothill and coastal wild-land urban interface zones but also the deep social dimensions embedded within wildfire disasters. Using remote sensing tools such as Landsat based false color imagery, environmental monitoring efforts can clearly delineate burn severity, vegetation loss and fire scar patterns that acts as critical information for assessing ecological recovery and guiding restoration. Yet the impacts of these fires extended far beyond the physical landscape. Thousands of homes were destroyed, tens of thousands of residents were displaced, and long standing inequities shaped who suffered most, who could rebuild and how quickly communities could recover. Factors such as income level, housing security, access to insurance, language barriers, transportation availability, and trust in public institutions strongly influenced how individuals responded to evacuation orders, accessed emergency services, and navigated post-fire assistance. By integrating advanced data visualization with an understanding of these social realities, environmental monitoring becomes not only a scientific exercise but also a tool for informing more just, community-centered wildfire resilience planning
 
-### Purpose
+This analysis combines the environmental monitoring with social vulnerability data to show how the Eaton and Palisades fires affected both the natural landscape and the communities living within it.
 
-The purpose of the task in this notebook is to produce a false-color image of the Eaton and Palisades Fires using remote sensing data, highlighting the burn scar and demonstrating how coding and data visualization support environmental monitoring.
+## Highlights
+The analysis illustrates Python-based approaches for geospatial investigation:
+- Use `xarray` and `rioxarray` to create false-color images from Landsat 8 SWIR, NIR, and Red bands, revealing burn scars.
+- Combine raster satellite data with vector layers (fire perimeters and census tracts) in `geopandas` to integrate multiple data sources.
+- Maintain spatial accuracy by managing coordinate reference systems with `rio.write_crs()` and `to_crs()`.
+- Perform environmental justice analysis by using spatial joins and clipping to examine socioeconomic vulnerability in the burn-affected areas.
 
-### Highlights
-The key highlights of this assignment is to:
+## Dataset descriptions
 
-- Explore NetCDF data, xarray and restore geospatial information
-- Map a True color image
-- Map a False color image
-- Map the Eaton and Palisades fire boundaries using false-color satellite imagery.
+#### Simplified collection of bands from the Landsat Collection 2 Level-2**
+This dataset is a simplified collection of bands (red, green, blue, near-infrared and shortwave infrared) from the Landsat Collection 2 Level-2 atmosperically corrected surface reflectance data, collected by the Landsat 8 satellite. The data was retrieved from the [Microsoft Planetary Computer data catalogue](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2) and clipped to an area surrounding the fire perimeters.
 
-### About the data
+#### Fire perimeters for the Eaton and Palisades fires**
+This dataset is dissolved fire perimeters/boundaries for Eaton and Palisades fires. The data can be accessed from the [County of Los Angeles Open Data](https://data.lacounty.gov/maps/ad51845ea5fb4eb483bc2a7c38b2370c/about).
 
-In this task, we will work with two datasets:
+#### Environmental Justice Index (EJI) Data
+The 2024 [California Environmental Justice Index (EJI)](https://atsdr.cdc.gov/place-health/php/eji/eji-data-download.html), developed by the CDC and ATSDR, offers census tract-level information on both environmental and socioeconomic factors. This analysis utilizes the dataset to examine demographic characteristics, poverty levels, and environmental burden indicators across communities in California.
 
-#### **First Dataset: Simplified collection of bands from the Landsat Collection 2 Level-2**
+## Analysis 1: Visualizing fire scars through false color
 
-The first dataset is a simplified collection of bands (red, green, blue, near-infrared and shortwave infrared) from the Landsat Collection 2 Level-2 atmosperically corrected surface reflectance data, collected by the Landsat 8 satellite.
+## Data Analysis Sections
 
-The data was retrieved from the Microsoft Planetary Computer data catalogue and clipped to an area surrounding the fire perimeters.
-
-- **Data Source:** [Microsoft Planetary Computer data catalogue](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2)
-- **Data Access:** November 15, 2025
-
-#### **Second Dataset: Fire perimeters for the Eaton and Palisades fires**
-
-The second dataset is dissolved fire perimeters/boundaries for Eaton and Palisades fires. The data can be accessed from the [link](https://data.lacounty.gov/maps/ad51845ea5fb4eb483bc2a7c38b2370c/about).
-
-- **Data Source:** [County of Los Angeles Open Data](https://data.lacounty.gov/)
-- **Data Access:** November 15, 2025
-
-### References
-
-*Landsat Collection 2 Level-2*. Microsoft Planetary Computer. Retrieved 15 Nov, 2025. https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2.
-
-*Palisades and Eaton Dissolved Fire Perimeters*. (2025) County of Los Angeles Open Data. https://data.lacounty.gov/maps/ad51845ea5fb4eb483bc2a7c38b2370c/about.
-
-*Why Is That Forest Red and That Cloud Blue?*. (2014, March 4). NASA Earth Observatory. https://earthobservatory.nasa.gov/features/FalseColor.
-
-*What Are the Band Designations for the Landsat Satellites?*.(2025, July 11). U.S. Geological Survey. https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites.
-
-*Common Landsat Band Combinations*. (2021, November 12). U.S. Geological Survey. https://www.usgs.gov/media/images/common-landsat-band-combinations
-
-## 2. Fire perimeter data exploration
-
-Explore the fire perimeter data and write a brief summary of the information you obtained from the preliminary exploration.
-
-### Import data  
-- Import the Fire perimeters for the Eaton and Palisades fires data as a variable named `eaton` and `palisades` respectively.
-
-Construct file paths using the `os` package to access the data.
+### Setup
 
 ```{python}
+# Import required libraries
 import os
 import numpy as np
 import pandas as pd
@@ -83,62 +63,30 @@ import matplotlib.pyplot as plt
 #from matplotlib_scalebar.scalebar import ScaleBar
 ```
 
-Read the Eaton fire dataset.
+### Import fire perimeterdata
+
+Fire perimeter data define the spatial extent of the fires, enabling focused analysis on the most impacted areas. Each dataset includes polygon geometries representing the fire boundaries, along with corresponding area and perimeter measurements.
 
 ```{python}
-# Define the file path
-#fp_1 = os.path.join('data', 'Eaton_Perimeter_20250121')
-
 # Use geopandas.read_file() to read the file
 eaton = gpd.read_file("data/Eaton_Perimeter_20250121/Eaton_Perimeter_20250121.shp")
-eaton.head()
-```
-
-Read the Palisades fire dataset.
-
-```{python}
-# Define the file path
-#fp_2 = os.path.join('data', 'Palisades_Perimeter_20250121')
-
-# Use geopandas.read_file() to read the file
 palisades = gpd.read_file("data/Palisades_Perimeter_20250121/Palisades_Perimeter_20250121.shp")
-palisades.head()
 ```
+### Import NetCDF data
 
-## 3. NetCDF data import and exploration
-
-- Import the Landsat data using xr.open_dataset().
-
-- Explore the data and write a brief summary of the information you obtained from the preliminary information. Your summary should include the a description of the data’s variables, dimensions, and coordinates.
+-   Explore the data and write a brief summary of the information you obtained from the preliminary information. Your summary should include the a description of the data’s variables, dimensions, and coordinates.
 
 ```{python}
-# Define the file path
-#fp = os.path.join('data', 'landsat8-2025-02-23-palisades-eaton.nc')
-
+# Import the Landsat data using xr.open_dataset().
 landsat = xr.open_dataset("data/landsat8-2025-02-23-palisades-eaton.nc")
-
-
-
-# Import the Landsat data using xr.open_dataset()
-#try:
-#    landsat = xr.open_dataset("data/landsat8-2025-02-23-palisades-eaton.nc")
-#    print("✅ Data imported successfully!")
-#    print(landsat)
-
-#except FileNotFoundError:
-#    print(f"❌ Error: File not found. Check the file path.")
-
-#except Exception as e:
-#    print(f"❌ An error occurred during import: {e}")
 ```
 
-#### A brief summary of the NetCDF dataset
-
+**Summary of the NetCDF dataset**
 This dataset is a **remote sensing raster dataset** loaded as `xarray.Dataset`. The total size of the dataset is 78MB. The dataset exploration gave an information on dimensions, coordinates nad data variables.
 
 There are two spatial dimensions on dataset. The (y: 1418) represents the vertical spatial dimension (rows) and (x: 2742) represents the horizontal spatial dimension (columns).
 
-The dataset has coordinate arrays for both x and y, stored as float64 values that corresponds to their respective spatial map coordinates. There is a only one time coordinate stored as datetime64[ns], that indicates when the image was taken.
+The dataset has coordinate arrays for both x and y, stored as float64 values that corresponds to their respective spatial map coordinates. There is a only one time coordinate stored as datetime64\[ns\], that indicates when the image was taken.
 
 There are five different spectral bands: red, green, blue, nir08 and swir22, and they have the same pixel grid (float32). A spatial_ref variable is also included to store the map projection information.
 
@@ -146,28 +94,28 @@ There are five different spectral bands: red, green, blue, nir08 and swir22, and
 
 Check the coordinate reference system of the landsat data and transform as necessary.
 
-a. Use `rio.crs` to print what is the CRS of this dataset. Is this a geospatial object?
+a.  Use `rio.crs` to print what is the CRS of this dataset. Is this a geospatial object?
 
 ```{python}
 # Check CRS of the dataset
 print(landsat.rio.crs)
 ```
 
-b. Print the CRS by using accesing the `spatial_ref.crs_wkt` attribute of the dataset.
+b.  Print the CRS by using accesing the `spatial_ref.crs_wkt` attribute of the dataset.
 
 ```{python}
 # Print CRS of the dataset
 print(landsat.spatial_ref.crs_wkt)
 ```
 
-c. Recover the geospatial information by using `rio.write_crs()` and the spatial reference information from part b.
+c.  Recover the geospatial information by using `rio.write_crs()` and the spatial reference information from part b.
 
 ```{python}
 # Recover the geospatial information
 print(landsat.rio.write_crs(landsat.spatial_ref.crs_wkt, inplace=True))
 ```
 
-d. Print the CRS of the updated dataset.
+d.  Print the CRS of the updated dataset.
 
 ```{python}
 # Print the CRS of the updated dataset
@@ -178,19 +126,20 @@ print(landsat.rio.crs)
 
 To create a True color image, follow the following steps:
 
-a. Without creating any new variables:
-- select the red, green, and blue variables (in that order) of the `xarray.Dataset` holding the Landsat data,
-- convert it to a `numpy.array` using the `to_array()` method, and then
-- use `.plot.imshow()` to create an RGB image with the data. There will be two warnings, that’s ok.
+a.  Without creating any new variables:
 
-b. Adjust the scale used for plotting the bands to get a true color image. HINT: Check the robust parameter. *The issue here is the clouds: their RGB values are outliers and cause the other values to be squished when plotting.
+-   select the red, green, and blue variables (in that order) of the `xarray.Dataset` holding the Landsat data,
+-   convert it to a `numpy.array` using the `to_array()` method, and then
+-   use `.plot.imshow()` to create an RGB image with the data. There will be two warnings, that’s ok.
+
+b.  Adjust the scale used for plotting the bands to get a true color image. HINT: Check the robust parameter. \*The issue here is the clouds: their RGB values are outliers and cause the other values to be squished when plotting.
 
 ```{python}
 # Select the red, green and blue variables, convert it to a numpy.array and create an RGB image
 landsat[['red', 'green', 'blue']].to_array().plot.imshow(robust = True)
 ```
 
-c. To resolve the other warning, identify which bands have `nan` values. HINT: There are many ways of doing so. One option is to use `numpy.isnan()`.
+c.  To resolve the other warning, identify which bands have `nan` values. HINT: There are many ways of doing so. One option is to use `numpy.isnan()`.
 
 ```{python}
 # Identify 'nan' values in bands
@@ -202,14 +151,14 @@ for i in ['red', 'green', 'blue']:
     print(f"The {i} band has {nan_count} Nan values.")
 ```
 
-d. Use the `.fillna()` mehtod for `xarray.Datasets` to substitute the any `nan` values in the Landsat data for zero.
+d.  Use the `.fillna()` mehtod for `xarray.Datasets` to substitute the any `nan` values in the Landsat data for zero.
 
 ```{python}
 # Substitute any 'nan' values in the Landsat data for zero
 landsat = landsat.fillna(0)
 ```
 
-e. Create a new true color image that gets plotted without warnings.
+e.  Create a new true color image that gets plotted without warnings.
 
 ```{python}
 # Create a new true color image without warnings
@@ -223,6 +172,7 @@ The first true color image (part a) was plotted directly from the red, green and
 In part (part e), we replaced all Nan values with zeros before plotting again. This removed the missing values issue allowing the plot to scale the data more smoothly. So, the second true color image displayed without warnings. The second true color image looks cleaner and has better contrast. It doesn’t have the plotting problems seen in the first image.
 
 ## 6. False color image
+
 Without creating any new variables, create a false color image by plotting the short-wave infrared (swir22), near-infrared, and red variables (in that order).
 
 ```{python}
@@ -233,7 +183,8 @@ plt.show()
 ```
 
 ## 7. Map
-a. Create a map showing the shortwave infrared/near-infrared/red false color image together with both fire perimeters. Customize it appropriately including, at least, an informative title and legend. You may also want to include text on the map to identify which fire is which.
+
+a.  Create a map showing the shortwave infrared/near-infrared/red false color image together with both fire perimeters. Customize it appropriately including, at least, an informative title and legend. You may also want to include text on the map to identify which fire is which.
 
 ```{python}
 # Combine the two fire perimeter datasets into a single GeoDataFrame
@@ -242,7 +193,6 @@ fires = pd.concat([eaton, palisades], ignore_index = True)
 # Convert CRS of the Eaton and Palisades fire perimeter to landsat dataset CRS
 fires = fires.to_crs('epsg:32611')
 ```
-
 
 ```{python}
 # Initialize the map
@@ -289,5 +239,12 @@ This combination of bands is useful for spotting burn scars and understanding fi
 
 
 
+*Landsat Collection 2 Level-2*. Microsoft Planetary Computer. Retrieved 15 Nov, 2025. https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2.
 
+*Palisades and Eaton Dissolved Fire Perimeters*. (2025) County of Los Angeles Open Data. https://data.lacounty.gov/maps/ad51845ea5fb4eb483bc2a7c38b2370c/about.
 
+*Why Is That Forest Red and That Cloud Blue?*. (2014, March 4). NASA Earth Observatory. https://earthobservatory.nasa.gov/features/FalseColor.
+
+*What Are the Band Designations for the Landsat Satellites?*.(2025, July 11). U.S. Geological Survey. https://www.usgs.gov/faqs/what-are-band-designations-landsat-satellites.
+
+*Common Landsat Band Combinations*. (2021, November 12). U.S. Geological Survey. https://www.usgs.gov/media/images/common-landsat-band-combinations
