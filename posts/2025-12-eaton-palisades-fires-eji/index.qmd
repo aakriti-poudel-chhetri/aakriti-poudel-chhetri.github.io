@@ -20,8 +20,8 @@ bibliography: references.bib
 
 Link to GitHub repository:
 
-- For environmental monitoring, <https://github.com/aakriti-poudel-chhetri/eds220-hwk4>
-- For social impact analysis, <https://github.com/aakriti-poudel-chhetri/eds220-2025-discussion-sections/blob/main/week8-eaton-and-palisades-fire.ipynb>
+-   For environmental monitoring, <https://github.com/aakriti-poudel-chhetri/eds220-hwk4>
+-   For social impact analysis, <https://github.com/aakriti-poudel-chhetri/eds220-2025-discussion-sections/blob/main/week8-eaton-and-palisades-fire.ipynb>
 
 ## About this blog post
 
@@ -33,10 +33,10 @@ This analysis combines the environmental monitoring with social vulnerability da
 
 The analysis illustrates Python-based approaches for geospatial investigation:
 
-- Use `xarray` and `rioxarray` to create false-color images from Landsat 8 SWIR, NIR, and Red bands, revealing burn scars.
-- Combine raster satellite data with vector layers (fire perimeters and census tracts) in `geopandas` to integrate multiple data sources.
-- Maintain spatial accuracy by managing coordinate reference systems with `rio.write_crs()` and `to_crs()`.
-- Perform environmental justice analysis by using spatial joins and clipping to examine socioeconomic vulnerability in the burn-affected areas.
+-   Use `xarray` and `rioxarray` to create false-color images from Landsat 8 SWIR, NIR, and Red bands, revealing burn scars.
+-   Combine raster satellite data with vector layers (fire perimeters and census tracts) in `geopandas` to integrate multiple data sources.
+-   Maintain spatial accuracy by managing coordinate reference systems with `rio.write_crs()` and `to_crs()`.
+-   Perform environmental justice analysis by using spatial joins and clipping to examine socioeconomic vulnerability in the burn-affected areas.
 
 ## Dataset descriptions
 
@@ -68,7 +68,7 @@ import contextily as cx
 
 ## Analysis 1: Visualizing fire scars through false color
 
-### Data Analysis Sections
+### Data analysis sections
 
 #### Import fire perimeter data
 
@@ -243,7 +243,7 @@ This combination of bands is useful for spotting burn scars and understanding fi
 
 The Environmental Justice Index (EJI) highlights the social dimensions of wildfire impacts, revealing how vulnerable communities are disproportionately affected. These maps provide clear visualizations of factors such as age, health, and economic vulnerability, helping to identify populations most at risk and the underlying patterns of environmental injustice in each county.
 
-### Data Analysis Sections
+### Data analysis sections
 
 ```{python}
 # Load census tract-level socioeconomic data
