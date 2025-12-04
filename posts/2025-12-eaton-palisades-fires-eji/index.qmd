@@ -60,7 +60,8 @@ import xarray as xr
 import rioxarray as rxr
 import geopandas as gpd
 import matplotlib.pyplot as plt
-#from matplotlib_scalebar.scalebar import ScaleBar
+#from IPython.display import Markdown
+#Markdown
 ```
 
 ### Import fire perimeterdata
@@ -72,13 +73,39 @@ Fire perimeter data define the spatial extent of the fires, enabling focused ana
 eaton = gpd.read_file("data/Eaton_Perimeter_20250121/Eaton_Perimeter_20250121.shp")
 palisades = gpd.read_file("data/Palisades_Perimeter_20250121/Palisades_Perimeter_20250121.shp")
 ```
-### Import NetCDF data
 
--   Explore the data and write a brief summary of the information you obtained from the preliminary information. Your summary should include the a description of the data’s variables, dimensions, and coordinates.
+```{python}
+#| label: fire-perimeter-summary
+#| echo: false
+
+# Create summary table for data exploration
+summary_data = {
+    'Dataset': ['Eaton Fire', 'Palisades Fire'],
+    'Features': [len(eaton), len(palisades)],
+    'Columns': [len(eaton.columns), len(palisades.columns)],
+    'Geometry Type': [eaton.geometry.type.unique()[0], palisades.geometry.type.unique()[0]]
+}
+
+summary_df = pd.DataFrame(summary_data)
+
+# Display as formatted table
+#display(Markdown(summary_df.to_markdown(index=False)))
+
+print(summary_df.to_markdown(index=False))
+
+```
+
+The `eaton` and `palisades` datasets both have 5 columns (`OBJECTID`, `type`, `Shape_Are`, `Shape_Len` and `geometry`) with the same data types. The data types used are appropriate for all values in their respective columns. There is no missing data in the column. 
+There are 20 rows in `eaton` dataset and 21 rows in `palisades` dataset.
+
+Both of the dataset has same `CRS (EPSG:3857)`, which is **projected coordinate system** that uses the Mercator projection to display the spherical Earth on a flat map.
+
+### Import NetCDF data
 
 ```{python}
 # Import the Landsat data using xr.open_dataset().
 landsat = xr.open_dataset("data/landsat8-2025-02-23-palisades-eaton.nc")
+landsat
 ```
 
 **Summary of the NetCDF dataset**
