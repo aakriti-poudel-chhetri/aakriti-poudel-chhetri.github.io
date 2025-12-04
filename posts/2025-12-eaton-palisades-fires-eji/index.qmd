@@ -18,7 +18,7 @@ draft: false
 bibliography: references.bib
 ---
 
-Link to GitHub repository: [Mapping environmental and social impacts of Eaton and Palisades fires](https://github.com/aakriti-poudel-chhetri/eds220-hwk4)
+Link to GitHub repository: For environmental monitoring, visit <https://github.com/aakriti-poudel-chhetri/eds220-hwk4> & For analysis of social impact, visit <https://github.com/aakriti-poudel-chhetri/eds220-2025-discussion-sections/blob/main/week8-eaton-and-palisades-fire.ipynb>.
 
 ## About this blog post
 
@@ -28,7 +28,11 @@ This analysis combines the environmental monitoring with social vulnerability da
 
 ## Highlights
 
-The analysis illustrates Python-based approaches for geospatial investigation: - Use `xarray` and `rioxarray` to create false-color images from Landsat 8 SWIR, NIR, and Red bands, revealing burn scars. - Combine raster satellite data with vector layers (fire perimeters and census tracts) in `geopandas` to integrate multiple data sources. - Maintain spatial accuracy by managing coordinate reference systems with `rio.write_crs()` and `to_crs()`. - Perform environmental justice analysis by using spatial joins and clipping to examine socioeconomic vulnerability in the burn-affected areas.
+The analysis illustrates Python-based approaches for geospatial investigation:
+  - Use `xarray` and `rioxarray` to create false-color images from Landsat 8 SWIR, NIR, and Red bands, revealing burn scars.
+  - Combine raster satellite data with vector layers (fire perimeters and census tracts) in `geopandas` to integrate multiple data sources.
+  - Maintain spatial accuracy by managing coordinate reference systems with `rio.write_crs()` and `to_crs()`.
+  - Perform environmental justice analysis by using spatial joins and clipping to examine socioeconomic vulnerability in the burn-affected areas.
 
 ## Dataset descriptions
 
@@ -113,14 +117,16 @@ The dataset has coordinate arrays for both x and y, stored as float64 values tha
 
 There are five different spectral bands: red, green, blue, nir08 and swir22, and they have the same pixel grid (float32). A spatial_ref variable is also included to store the map projection information.
 
-## Restoring geospatial information
+#### Restoring geospatial information
 
 ```{python}
 # Recover the geospatial information and spatial reference information
 print(landsat.rio.write_crs(landsat.spatial_ref.crs_wkt, inplace=True))
 ```
 
-## Create a True color image
+## Visualize Eaton and Palisades fires
+
+#### Create a True color image
 
 To create a true-color image from the Landsat dataset, select the red, green, and blue bands, in that order, directly from the existing `xarray.Dataset` without creating any new variables. Then convert these bands into a NumPy array using the `to_array()` method and `use .plot.imshow()` to display them as an RGB image. Two warnings appear during this step, but they are okay to ignore. Finally, adjust the plotting scale, using the robust parameter to handle extreme values, since clouds act as outliers and can compress the contrast of the image if not corrected.
 
@@ -161,7 +167,7 @@ The first true color image (part a) was plotted directly from the red, green and
 
 In part (part e), we replaced all Nan values with zeros before plotting again. This removed the missing values issue allowing the plot to scale the data more smoothly. So, the second true color image displayed without warnings. The second true color image looks cleaner and has better contrast. It doesn’t have the plotting problems seen in the first image.
 
-## Create a False color image
+#### Create a False color image
 
 To create a false-color image, you select the short-wave infrared (swir22), near-infrared and red bands, in that order, directly from the dataset without making any new variables, and then plot them together as an RGB image.
 
@@ -172,7 +178,7 @@ plt.title('False Color Image (SWIR2-NIR-Red)')
 plt.show()
 ```
 
-## Create a False color image for Eaton and Palisades fires
+#### Create a False color image for Eaton and Palisades fires
 
 Create a map by plotting the shortwave infrared/near-infrared/red false-color image and overlay both fire perimeters on top of it. Customize the map with an informative title and a clear legend, and you may also add text labels directly on the map to identify which fire boundary corresponds to which fire.
 
