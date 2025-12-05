@@ -432,7 +432,7 @@ ggplot() +
   labs(x = "Predictor value (%)",
        y = "Decoupling years",
        title = "A decade of decoupling: Rising GDP and Declining Emissions",
-    subtitle = "Line shows model predictions & Shape shows actual observations")
+    subtitle = "Straight lne shows model predictions & Shape shows actual observations")
 
 ```
 
