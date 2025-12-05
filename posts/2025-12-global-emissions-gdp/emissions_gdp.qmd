@@ -375,6 +375,10 @@ ggplot(decoup_ten, aes(x = reorder(country_name, decoupling_years),
 ### Fit GDP and emissions data into a model
 
 ```{r}
+#| output: false
+#| warning: false
+#| message: false
+
 # Fit the model
 nb_model <- glm.nb(decoupling_years ~ avg_gdp_growth + avg_emission_reduction,
                 data = decoupling_case)
@@ -408,9 +412,9 @@ pred_combined <- bind_rows(pred_gdp, pred_emission)
 ggplot() +
   geom_point(data = decoupling_case, 
              aes(x = avg_gdp_growth, y = decoupling_years, shape = "GDP growth"),
-             size = 3, alpha = 0.7, color = "hotpink") +
+             size = 0.5, alpha = 0.7, color = "hotpink") +
   geom_point(data = decoupling_case, 
-             aes(x = avg_emission_reduction, y = decoupling_years, shape = "Emissions reduction"), size = 3, alpha = 0.7, color = "darkgreen") +
+             aes(x = avg_emission_reduction, y = decoupling_years, shape = "Emissions reduction"), size = 0.5, alpha = 0.7, color = "darkgreen") +
   geom_line(data = pred_gdp,
             aes(x = avg_gdp_growth, y = pred, color = "GDP growth"),
             linewidth = 0.8) +
