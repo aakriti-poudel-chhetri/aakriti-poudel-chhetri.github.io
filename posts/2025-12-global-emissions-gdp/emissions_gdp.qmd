@@ -16,15 +16,15 @@ image: dag-emission-gdp.png
 draft: false
 ---
 
-# Introduction
+## Introduction
 
 Can a country reduce emissions while growing its GDP? This question has gained significant attention in recent years as all countries globally are trying to achieve the economic development with maintaining environmental sustainability. In this assignment, we examine global power-sector emissions and GDP data from more than 200 countries to explore whether sustained economic growth can occur alongside meaningful emission reductions.
 
-# Background
+## Background
 
 Economic growth and greenhouse gas emissions have traditionally been closely linked. The increase in GDP is often accompanied by higher emissions rate due to higher energy consumption, increasing industrial activities and infrastructure growth. However, the recent trend shows that some countries are beginning to break this pattern. By analyzing emissions alongside GDP, we can identify which countries are achieving ‘decoupling’ where economic growth increases without a corresponding rise in emissions. This decoupling can be a result of combination of multiple factors such as clean energy, improvements in energy efficiency, technological innovation and effective climate policies. The study of these trends provides valuable insights into how countries can pursue sustainable development, balancing economic progress with environmental responsibility. It can serve as a guide for other nations who are aiming to reduce their carbon footprint while maintaining their economic growth.
 
-# Directed Acyclic Graph (DAG)
+## Directed Acyclic Graph (DAG)
 
 The following DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU), Technology (T) and Governance (G) interact to shape both Emissions quantity (EQ) and GDP. The economy influences energy use, technological development, emissions and GDP. Energy use also contributes to technological change, which then affects both emissions and GDP. Governance has a direct impact on GDP as well. Overall, the DAG highlights the direct and indirect connections among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias.
 
@@ -68,7 +68,7 @@ ggdag(dag, text = TRUE) +
   theme_void()
 ```
 
-# Data Description
+## Data Description
 
 Here, we will work with the following data sets:
 
@@ -82,7 +82,7 @@ This data set is retrieved from [Climate TRACE](https://climatetrace.org/data). 
 
 In this analysis, we focus specifically on the power sector data, which provides detailed emissions estimates, allowing us to examine trends and impacts within one of the largest sources of global greenhouse-gas emissions.
 
-# Hypotheses Statement
+## Hypotheses Statement
 
 **Question:** Is it possible to achieve emission reductions while maintaining GDP growth?
 
@@ -90,7 +90,7 @@ In this analysis, we focus specifically on the power sector data, which provides
 
 **HA:** There is significant relationship between GDP growth and emission reductions.
 
-# Data Simulation
+## Data Simulation
 
 In this project, we will examine whether it is possible for countries to achieve emission reductions while maintaining GDP growth. To evaluate this relationship, one variable must increase while the other decreases. Additionally, the global emissions and GDP data exhibit clear signs of over dispersion, making the Negative Binomial Model an appropriate choice for analysis.
 
@@ -110,7 +110,7 @@ Fit a logistic model like this:
 
 model \<- glm.nb(binary_outcome \~ predictor, data = my_data)
 
-### Set up
+#### Set up
 
 ```{r}
 #| output: false
@@ -124,7 +124,7 @@ library(MASS)
 library(modelsummary)
 ```
 
-### Set parameters and test model
+#### Set parameters and test model
 
 ```{r}
 #| label: data-simulation
@@ -152,7 +152,7 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 
 ```
 
-### Visualize the model
+#### Visualize the model
 
 ```{r}
 library(ggplot2)
@@ -196,9 +196,9 @@ print(paste0("Estimated Theta: ", round(estimated_theta, 4)))
 
 ```
 
-# GDP and Emissions Data
+## GDP and Emissions Data
 
-### Read GDP and emissions data set
+#### Read GDP and emissions data set
 
 ```{r}
 #| output: false
@@ -226,7 +226,7 @@ gdp <- read_csv(here::here('posts', '2025-12-global-emissions-gdp', 'data', 'API
 
 ```
 
-### Data wrangling
+#### Data wrangling
 
 **Combine and clean power sub sector data for yearly analysis.**
 
@@ -276,7 +276,7 @@ power_gdp <- power_year_cleaned %>%
 
 ```
 
-#### Identify ten highest emissions countries
+##### Identify ten highest emissions countries
 
 ```{r}
 # Calculate the mean emissions of countries for each year (2015 - 2024)
@@ -313,7 +313,7 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
        color = "Country") +
   theme_classic()
 ```
-#### Calculate GDP and emissions changes 
+##### Calculate GDP and emissions changes 
 
 ```{r}
 # Aggregate GDP and emissions by country and year
@@ -332,7 +332,7 @@ annual_changes <- country_totals %>%
   ungroup()
 ```
 
-### Identify countries with increased GDP and decreased emissions
+#### Identify countries with increased GDP and decreased emissions
 
 ```{r}
 # Find the cases where emissions decreased while GDP increased
@@ -351,7 +351,7 @@ decoupling_case <- decoupling %>%
 
 ```
 
-#### Visualize top ten countries with decoupling effects
+##### Visualize top ten countries with decoupling effects
 
 ```{r}
 # Filter the top ten countries with decoupling effects
@@ -372,7 +372,7 @@ ggplot(decoup_ten, aes(x = reorder(country_name, decoupling_years),
   ylim(0, max(decoup_ten$decoupling_years) * 1.1)
 
 ```
-### Fit GDP and emissions data into a model
+#### Fit GDP and emissions data into a model
 
 ```{r}
 #| output: false
@@ -385,7 +385,7 @@ nb_model <- glm.nb(decoupling_years ~ avg_gdp_growth + avg_emission_reduction,
 
 ```
 
-#### Create prediction data for GDP and emissions
+##### Create prediction data for GDP and emissions
 
 ```{r}
 # Predictions for GDP growth (holding emission reduction constant)
@@ -405,7 +405,7 @@ pred_combined <- bind_rows(pred_gdp, pred_emission)
 
 ```
 
-#### Visualize the model prediction
+##### Visualize the model prediction
 
 ```{r}
 # Plot the GDP and emissions
