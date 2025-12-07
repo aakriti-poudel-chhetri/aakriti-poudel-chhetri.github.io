@@ -32,6 +32,10 @@ This approach highlights both the spatial distribution of storm impacts and the 
 Let’s start by importing all the necessary libraries.
 
 ```{r}
+#| output: false
+#| warning: false
+#| message: false
+
 library(tidyverse)
 library(sf)
 library(tmap)
