@@ -242,6 +242,10 @@ tm_basemap('OpenStreetMap') +
 Now estimate the number of homes in Houston that lost power during the February 2021 winter storms. By identifying which building footprints intersect with the blackout mask, the analysis isolates the homes likely affected by outages. Converting buildings to centroids allows for precise spatial calculations and comparisons between impacted and non-impacted houses, resulting in an estimated total of approximately 157,970 homes without power.
 
 ```{r}
+#| output: false
+#| warning: false
+#| message: false
+
 # Keep buildings that intersect with blackout areas
 houses_blackout <- st_intersects(houses, blackout_far)
 
