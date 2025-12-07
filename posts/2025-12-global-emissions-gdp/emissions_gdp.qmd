@@ -48,7 +48,6 @@ library(dagitty)
 library(ggdag)
 ```
 
-
 ```{r}
 #| label: Directed Acyclic Graph (DAG)
 
@@ -187,6 +186,7 @@ negbinomial_summary <- list ("Negative Binomial" = glm.nb(y ~ x, data = my_data)
 modelsummary(negbinomial_summary)
 
 ```
+
 Here, let's check the dispersion parameter that controls the amount of over dispersion in the data.
 
 ```{r}
@@ -313,7 +313,8 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
        color = "Country") +
   theme_classic()
 ```
-##### Calculate GDP and emissions changes 
+
+##### Calculate GDP and emissions changes
 
 ```{r}
 # Aggregate GDP and emissions by country and year
@@ -372,6 +373,7 @@ ggplot(decoup_ten, aes(x = reorder(country_name, decoupling_years),
   ylim(0, max(decoup_ten$decoupling_years) * 1.1)
 
 ```
+
 #### Fit GDP and emissions data into a model
 
 ```{r}
@@ -435,6 +437,3 @@ ggplot() +
     subtitle = "Straight lne shows model predictions & Shape shows actual observations")
 
 ```
-
-
-
