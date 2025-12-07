@@ -15,9 +15,21 @@ categories: [MEDS, R, GIS, geospatial, remote sensing, data science]
 image: before-after-storm.png
 draft: false
 ---
+Link to GitHub repository: https://github.com/aakriti-poudel-chhetri/impacts-of-extreme-weather
 
+# Introduction
 
-## Load required libraries
+Climate change is increasing the frequency and intensity of extreme weather events, with devastating impacts. In February 2021, Texas experienced a major power crisis caused by three severe winter storms sweeping across the United States on February 10–11, 13–17, and 15–20. These storms led to widespread electricity outages, particularly in the Houston metropolitan area, but the spatial and socioeconomic distribution of these outages remains uncertain.
+
+This analysis  seeks to understand the spatial and socioeconomic impacts of the blackout by estimating the number of homes that lost power and examining whether these impacts were disproportionately felt across communities. Using remotely-sensed night-lights data from the VIIRS VNP46A1 satellite, areas of lost electric power are detected by comparing night-light intensity before and after the storm. These blackout areas are then linked with OpenStreetMap building data to estimate affected homes and with US Census Bureau data to explore potential socioeconomic patterns, such as differences in median household income between affected and unaffected census tracts.
+
+The study focuses on several related questions such as how many homes likely lost power during the winter storms; which geographic areas experienced measurable reductions in night-light intensity once highways are excluded; which census tracts were affected; and how does blackout exposure relate to median household income. Together, these questions aim to determine whether the blackout disproportionately impacted higher or lower income neighborhoods, and identify where, and to what extent, communities across Houston experienced power outages.
+
+This approach highlights both the spatial distribution of storm impacts and the limitations of using remote-sensing data for assessing power outages.
+
+### Load required libraries
+
+Let’s start by importing all the necessary libraries.
 
 ```{r}
 library(tidyverse)
@@ -28,6 +40,24 @@ library(stars)
 ```
 
 ## Read data
+
+The data for this study were retrieved from multiple sources listed below.
+
+**Night lights**
+- The NASA’s Worldview is explored for extracting the data around the day of the storm. There are several days with too much cloud cover to be useful, but 2021-02-07 and 2021-02-16 provides two clear, contrasting images to visualize the extent of the power outage in Texas.
+
+VIIRS data is distributed through NASA’s [Level-1 and Atmospheric Archive & Distribution System Distributed Active Archive Center (LAADS DAAC)](https://ladsweb.modaps.eosdis.nasa.gov/). Many NASA Earth data products are distributed in 10x10 degree tiles in sinusoidal equal-area projection. Tiles are identified by their horizontal and vertical position in the grid. Houston lies on the border of tiles h08v05 and h08v06. These two tiles per date were pre-downloaded and provided by the team.
+
+**Roads**
+- We used Geofabrik’s download sites to retrieve a shapefile of all highways in Texas and prepared a [Geopackage (.gpkg file)](https://download.geofabrik.de/) containing just the subset of roads that intersect the Houston metropolitan area. 
+
+**Houses**
+- The data were downloaded from [Geofabrik](https://download.geofabrik.de/) and processed to create a GeoPackage containing only residential buildings within the Houston metropolitan area.
+
+**Socioeconomic**
+- The socioecoomic data were obtained from the [U.S. Census Bureau’s American Community Survey](https://www.census.gov/programs-surveys/acs) for census tracts in 2019.
+
+Let's read the datsets.
 
 ```{r}
 #| output: false
@@ -69,7 +99,7 @@ income <- st_read(here::here('posts', '2025-12-impacts-of-extreme-weather', 'dat
 
 ```
 
-## Merge raster data and create houston bounding box
+First, the raster tiles were merged and cropped to the Houston bounding box to focus the analysis on the study area and ensure that only valid night-light data within Houston were used for assessing power outages.
 
 ```{r}
 # Merge two raster data of February 7
@@ -90,7 +120,7 @@ nightlight_16_crop <- st_crop(nightlight_16, houston_bbox)
 nightlight_16_crop[(nightlight_16_crop > 1000) | (nightlight_16_crop <= 0)] <- NA
 ```
 
-### Visualize before and after night light intensities
+Here, we visualize the comparison between night-light intensities in Houston before and after the February 2021 winter storm. By mapping the February 7 (pre-storm) and February 16 (post-storm) night-light data side by side, the analysis shows areas where lighting and likely power availability changed, helping to identify regions affected by the blackout.
 
 ```{r}
 #| fig-width: 18
@@ -160,7 +190,7 @@ tmap_save(tm = arranged_maps, here::here('figs', 'before-after-storm.jpeg'),
 
 ```
 
-## Create blackout mask
+We will now create a blackout mask by identifying areas of Houston where night light intensity decreased significantly after the storm, indicating potential power outages. By calculating the difference between before and after night light, cropping to the study area, filtering out minor changes, and vectorizing the result, the mask provides a spatial representation of blackout affected regions for further analysis.
 
 ```{r}
 # Calculate the difference in light intensity
@@ -177,6 +207,8 @@ blackout <- st_as_sf(mask,
   st_make_valid() %>%
   st_transform(crs = 'EPSG:3083')
 ```
+
+In this step, highway geometries are combined and buffered to exclude areas where changes in night light intensity could be due to traffic rather than power outages. By removing blackout areas within 200 meters of highways, the analysis isolates regions where lighting loss more likely reflects true residential or commercial power outages.
 
 ```{r}
 # Combine all highway geometries into one
@@ -199,11 +231,7 @@ tm_basemap('OpenStreetMap') +
 
 ```
 
-## Estimate of the number of homes in Houston that lost power
-
-Approximately **157,970** homes in Houston lost power in February 2021 due to the severe winter storms and resulting major power crisis.
-
-Note: I used `st_intersects`. `st_intersects` returns a boolean value indicating whether two geometries share any features or if they have any point in common. `TRUE (or 1)` if the geometries intersect, `FALSE (or 0)` if they are completely separate.
+Now estimate the number of homes in Houston that lost power during the February 2021 winter storms. By identifying which building footprints intersect with the blackout mask, the analysis isolates the homes likely affected by outages. Converting buildings to centroids allows for precise spatial calculations and comparisons between impacted and non-impacted houses, resulting in an estimated total of approximately 157,970 homes without power.
 
 ```{r}
 # Keep buildings that intersect with blackout areas
@@ -232,7 +260,7 @@ houses_not_impacted <- houses_points %>%
 
 ```
 
-### Map of the homes in Houston that lost power
+This map visualizes the spatial distribution of homes in Houston that lost power during the February 2021 winter storms. Impacted houses are highlighted in red, while unaffected houses are shown in blue, allowing for a clear comparison of affected versus unaffected areas across the city. The map provides a detailed spatial perspective on the extent of the blackout and helps identify which neighborhoods were most impacted.
 
 ```{r}
 #| fig-width: 6
@@ -263,7 +291,8 @@ tm_basemap('OpenStreetMap') +
              size = 2)
 
 ```
-## Census tracts in Houston that lost power
+
+The following process links census tract boundaries with median household income data to analyze the socioeconomic characteristics of neighborhoods affected by the blackout. By joining the income dataset to the census tract geometries, the analysis enables comparisons between impacted and non-impacted areas and supports investigation of whether power outages disproportionately affected higher- or lower-income communities.
 
 ```{r}
 # Rename the column in income dataset to match with the census tract
@@ -275,6 +304,8 @@ census_income <- census_tract %>% left_join(income_renamed, by = 'GEOID_Data')
 
 ```
 
+Let’s verify CRS. Verifying CRS alignment is essential for accurate spatial analysis, as mismatched projections can lead to incorrect geometry intersections, area calculations, or mapping errors.
+
 ```{r}
 #| warning: true
 
@@ -285,6 +316,8 @@ print("Coordinate reference systems match!")
 warning("Update coordinate reference systems to match!")
 }
 ```
+
+By aligning the coordinate systems and cropping to the Houston study area, census tracts and blackout affected houses are prepared for spatial comparison. Intersections between the two datasets identify which tracts experienced power outages, and a new column flags these impacted areas. Filtering to only the affected tracts enables a targeted analysis and visualization of how the blackout influenced neighborhoods across the city.
 
 ```{r}
 # Transform the CRS and crop to houston bounding box
@@ -310,7 +343,7 @@ census_blackout_col_filtered <- census_blackout_col[census_blackout_col$blackout
 
 ```
 
-### Map of the census tracts in Houston that lost power
+The following map highlights Houston census tracts that experienced power outages during the February 2021 winter storms. Affected tracts are shown in red, providing a clear visualization of the spatial distribution of blackouts across the city. This allows for easy identification of neighborhoods impacted by the storm and supports further analysis of socioeconomic patterns in relation to power loss.
 
 ```{r}
 #| fig-width: 5
@@ -340,9 +373,9 @@ tm_basemap('CartoDB.VoyagerNoLabels') +
   tm_scalebar(position = c('left', 'top'),
               text.size = 0.8)
   
- 
 ```
-## Plot comparing the distributions of median household income
+
+This plot compares the distributions of median household income between Houston census tracts that experienced blackouts and those that did not during the February 2021 winter storms. By visualizing income differences, it allows for assessment of whether power outages disproportionately affected higher- or lower-income neighborhoods and provides insight into potential socioeconomic disparities in storm impacts.
 
 ```{r}
 #| label: fig-income
@@ -368,9 +401,6 @@ ggplot(census_blackout_col %>% filter(!is.na(B19013e1)), # Remove NA values
         legend.position = 'bottom')
 ```
 
-## Brief reflection
+### Reflection on blackout impacts and study limitations
 
-**A brief reflection (approx. 100 words) summarizing your results and discussing any limitations to this study**
-
-**Answer**
-This analysis used satellite data to compare median household incomes between areas affected and unaffected by the blackout. Interestingly, higher-income census tracts were more affected, as their median income was slightly higher than that of non-blackout areas. This result may reflect several limitations such as wealthier neighborhoods often have more outdoor lighting, census tract–level data may overlook neighborhood differences, and blackout areas could be misclassified due to highway lighting or cloud cover. The analysis may also have assumed all structures were residential, while vegetation near power lines and the 200-meter buffer used could further limit accuracy of true lighting. 
+This analysis used satellite data to compare median household incomes between areas affected and unaffected by the blackout. Interestingly, higher-income census tracts were more affected, as their median income was slightly higher than that of non-blackout areas. This result may reflect several limitations such as wealthier neighborhoods often have more outdoor lighting, census tract–level data may overlook neighborhood differences, and blackout areas could be misclassified due to highway lighting or cloud cover. The analysis may also have assumed all structures were residential, while vegetation near power lines and the 200-meter buffer used could further limit accuracy of true lighting.
