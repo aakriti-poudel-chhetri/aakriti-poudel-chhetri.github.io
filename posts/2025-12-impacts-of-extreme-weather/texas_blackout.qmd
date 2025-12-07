@@ -27,7 +27,7 @@ The study focuses on several related questions such as how many homes likely los
 
 This approach highlights both the spatial distribution of storm impacts and the limitations of using remote-sensing data for assessing power outages.
 
-### Load required libraries
+### Set up
 
 Let’s start by importing all the necessary libraries.
 
@@ -43,7 +43,7 @@ library(terra)
 library(stars)
 ```
 
-## Read data
+## About data
 
 The data for this study were retrieved from multiple sources listed below.
 
@@ -215,6 +215,10 @@ blackout <- st_as_sf(mask,
 In this step, highway geometries are combined and buffered to exclude areas where changes in night light intensity could be due to traffic rather than power outages. By removing blackout areas within 200 meters of highways, the analysis isolates regions where lighting loss more likely reflects true residential or commercial power outages.
 
 ```{r}
+#| output: false
+#| warning: false
+#| message: false
+
 # Combine all highway geometries into one
 highways_union <- st_union(highways)
 
