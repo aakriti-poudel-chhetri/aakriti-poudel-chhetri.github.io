@@ -71,3 +71,5 @@ By combining technical rigor, digital tools, independent oversight, and inclusiv
 
 ::: {#refs}
 :::
+
+This is a test [@burt2020].
