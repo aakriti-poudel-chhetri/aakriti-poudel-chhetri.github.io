@@ -15,7 +15,6 @@ $medium-gray: #64605f;
 
 // define quarto variables
 $body-bg: $light-green; 
-$navbar-bg: $cream;
 $navbar-bg: $dark-green;
 $navbar-hl: $terracotta;
 $link-color: $terracotta;
@@ -45,7 +44,17 @@ $headings-color: $dark-gray !default;  //
 .navbar {
   font-family: "EB Garamond", serif;  // Change this to your desired font
   font-size: 1.1rem;                   // Adjust size if needed
-  font-weight: 500;                    // Adjust weight if needed
+  font-weight: 600;                    // Adjust weight if needed
+}
+
+// Navigation bar text color
+.navbar a {
+  color: $cream !important;
+}
+
+// Navigation bar text color on hover
+.navbar a:hover {
+  color: $terracotta !important;  // or whatever hover color you want
 }
 
 h1, h2 {
