@@ -15,6 +15,7 @@ categories: [MEDS, environmental data, data bias, data ethics, forest carbon mon
 image: fcm.png
 draft: false
 bibliography: references.bib
+nocite: '@*'
 ---
 
 ## Forest carbon context
@@ -71,5 +72,3 @@ By combining technical rigor, digital tools, independent oversight, and inclusiv
 
 ::: {#refs}
 :::
-
-This is a test [@burt2020].
