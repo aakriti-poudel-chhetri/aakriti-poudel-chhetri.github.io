@@ -1,0 +1,67 @@
+---
+title: "Forest carbon monitoring: Human errors and data Bias"
+description: "When forest conservation effort meets data errors"
+author:
+  - name: Aakriti Poudel
+    url: https://aakriti-poudel-chhetri.github.io/
+date: 2025-12-08
+format:
+  html:
+    code-fold: true
+    embed-resources: true
+citation: 
+  url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-forest-carbon-monitoring-data-bias/
+categories: [MEDS, environmental data, data bias, data ethics, forest carbon monitoring, data science]
+image: fcm.png
+draft: false
+---
+
+## Forest carbon context
+
+Imagine a community that has spent years protecting and managing their forests sustainably, expecting fair compensation for the carbon they have successfully sequestered. Now picture their entire payment depends on a dataset collected by forest technicians, and one flawed spreadsheet threatens to collapse the credibility of their effort. This was the reality I faced while working on one of the forest conservation and sustainable management projects. The project operated under an international climate change framework designed to reward developing countries for ‘Reducing Emissions from Deforestation and Forest Degradation’ (REDD+). Forest carbon assessments are fundamental part of REDD+, serving as the sole measure to determine whether communities and governments receive performance-based payments. Yet, despite the scientific precision these carbon inventories require, data can fail in very human ways. What I witnessed was not a theoretical issue discussed in the literature, it was a real case of biased and inconsistent data fabrication that nearly undermined the entire project.
+
+![Source: Forest carbon platform overview, Forest carbon monitoring consortium (2025)](fcm.png)
+## Measuring the forests
+
+The conservation project I worked on followed a standard approach: establish a baseline forest carbon stock in Year 1, then conduct a reassessment in Year 3 to track changes. Both assessments relied on systematic sampling across pre-defined plots, measuring variables such as diameter at breast height (DBH), tree height, crown cover, species identity, and soil characteristics. Data collection was carried out by trained forest technicians as well as local resource persons with forestry diplomas or undergraduate degrees. These local team members also handled preliminary data entry before the datasets were passed on to the technical team for cleaning and analysis.
+
+## When data looks too good to be true
+
+When the Year 3 forest carbon stock inventory was done, the estimated carbon sequestration was unexpectedly high, far beyond the ecological trends and management activities observed on the ground. During the data cleaning and quality control process, the technical team found several plots with implausibly high tree diameters and heights, species distributions that did not match the local forest composition, and unrealistic growth rates, a pattern consistent with previous reports of biomass prediction bias in tropical forests (Burt et al., 2020). Further investigation revealed that these entries were traced back to a small number of technicians who had fabricated measurements, likely influenced by the common assumption, even among trained staff, that forest carbon stocks should naturally increase over time.
+
+This type of data fabrication falls under human driven data fabrication and falsification bias, which occurs when data collector’s expectations shape the way measurements are recorded. As shown by Zvereva & Kozlov (2021) and Kimmel, Avolio, & Ferraro (2023), observer bias and selective reporting can lead researchers to unintentionally, or sometimes consciously, record or publish data that confirm expected trends. In forest carbon monitoring, even small instances of fabrication can dramatically affect project outcomes, especially in high-stakes frameworks like REDD+.
+
+## The hidden bias in forest carbon monitoring
+
+Beyond deliberate falsification, the dataset also suffered from multiple metadata and measurement issues, adding further layers of bias.
+
+- Measurement bias: Tree height was recorded using mixed units such as meters and feet, and DBH was not consistently defined as diameter at 1.3 m above the ground, violating basic forest mensuration standards. These inconsistencies made it hard to compare plots accurately and caused the carbon stock estimates to appear more variable than they really were. Such measurement errors are recognized in environmental research as systematic biases that can distort ecological conclusions (Konno et al., 2024).
+
+- Metadata bias: The dataset lacked a standardized datasheet. Species were labeled using local names rather than scientific names, and critical information such as measurement units, sampling dates, and methods was missing. This made it difficult to verify species identities, reproduce analyses, and apply uniform data cleaning procedures. In ecological research, incomplete or inconsistent metadata amplifies uncertainty in biomass estimates and can propagate errors throughout downstream analyses (Burt et al., 2020; Zvereva & Kozlov, 2021).
+
+- Procedural bias: The field teams applied subjective criteria when recording crown cover, tree health, and soil characteristics. The differences in interpretation between teams created inconsistencies across plots, a form of bias recognized in environmental studies where variability in data collection procedures systematically affects outcomes (Konno et al., 2024).
+
+- Misclassified bias: In the Year 3 forest carbon inventory, inconsistent measurement units, unclear DBH definitions, and missing metadata led to biologically implausible values, such as unrealistic height-to-diameter ratios. According to Konno et al. (2024), this represents misclassified comparison bias, which occurs when variables are measured or classified incorrectly. These errors can distort carbon stock estimates, potentially exaggerating sequestration outcomes and affecting REDD+ project decisions.
+
+These issues reflect broader patterns in biodiversity and forestry research, where inconsistent metadata, unclear measurement protocols, and subjective field judgments lead to significant variability and bias in ecological datasets.
+
+## Real world impacts of data bias
+
+In the Year 3 forest carbon inventory, biases in measurement, metadata, procedural judgments, and misclassification directly affected the carbon stock estimates (Burt et al., 2020; Konno et al., 2024; Zvereva & Kozlov, 2021). Inflated or biologically implausible values could have led to inaccurate REDD+ carbon accounting, misinformed management decisions, and unreliable performance reports. These errors also risked undermining donor trust, misallocating conservation resources, and weakening the long-term credibility of the forest monitoring system.
+
+## Insights from forest carbon monitoring
+
+This case made me reflect on the real-world consequences of environmental data bias, not as abstract definitions, but as concrete misrepresentations that shaped forest carbon estimates (Burt et al., 2020; Konno et al., 2024; Zvereva & Kozlov, 2021). It reminded me of a lecture from my Ethics in Environmental Data class, where we learned that bias rarely arises from a single error; it usually emerges from a chain of structural, procedural and human decisions. In this project, technicians operated under the assumption that forest carbon should naturally increase, a mindset that mirrors what our readings classify as confirmation bias.
+The gaps in metadata and inconsistent measurements align closely with bias categories described in ‘Potential types of bias when estimating causal effects in environmental research and how to interpret them’ (Konno et al., 2024). Misclassified bias, detection bias and performance bias match our scenario of mixed units, unclear DBH definitions, missing species taxonomy, and inconsistent field scoring (Burt et al., 2020; Zvereva & Kozlov, 2021).
+
+The impact became clear when questionable height-to-diameter ratios slipped through data cleaning, a clear example of measurement and misclassification bias. Our class discussions emphasized that even minor inconsistencies, like ambiguous units or missing metadata, can cascade through analyses and undermine the validity of inferences. In project like REDD+, poor record keeping and unclear procedures can lead to overestimated carbon stocks, incorrect baseline measurements and flawed decisions regarding policies and funding. This case demonstrates that environmental data is rarely neutral: it is shaped by human assumptions, institutional incentives, and the procedural structures guiding data collection and interpretation. As we discussed in class, these forms of structural bias often go unnoticed because they are embedded in organizational routines rather than individual choices.
+
+## Solutions for reliable forest carbon monitoring
+
+The effective solutions to data bias in forest carbon inventories do more than just improve data integrity, they strengthen the credibility and reliability of the entire monitoring process. Addressing this bias requires interventions at both technical and institutional levels. This includes adopting standardized protocols and metadata standards, defining variables, units, species codes, and implementing quality assurance and quality control workflows to ensure consistency. Such measures make forest monitoring more comparable across regions and time periods, reducing the variability that often undermines ecological assessments. Clear documentation also enables reproducibility, simplifies data cleaning, and strengthens downstream analyses, preventing errors from propagating through carbon stock estimates. Well-structured data practices have become an essential part of how earth and environmental sciences approach data stewardship (Forrester et al., 2016; Candela et al., 2020).
+
+The innovative digital tools, such as mobile apps and cloud-based platforms, can further improve data quality by ensuring unit consistency, flagging biologically implausible values and reducing transcription errors (Carroll et al., 2020). Another important strategy is independent verification and random audits. Third parties can check randomly selected plots or datasets to create accountability, detect fabrication and identify procedural biases early on (Burt et al., 2020; Konno et al., 2024).
+
+Finally, capacity building and ethical training for field staff can help mitigate confirmation and observer biases. The technicians should understand that carbon stocks can increase or decrease, and that uncertainty is an inherent part of forest monitoring. Training in data ethics, handling uncertainty and standardized scoring procedures promotes reliable data collection and discourages intentional or unconscious misreporting (Zvereva & Kozlov, 2021; Vera et al., 2019).
+
+By combining technical rigor, digital tools, independent oversight, and inclusive governance, forest carbon inventories can produce accurate and transparent outputs, supporting credible REDD+ accounting, reliable policy decisions and equitable outcomes for communities.
