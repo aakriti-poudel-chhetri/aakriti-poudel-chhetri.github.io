@@ -1,3 +1,6 @@
----
-title: "Something about my project!"
----
+
+## Something about me
+
+I am an environmental professional with over a decade of experience in project management and organizational development. Much of my work has focused on supporting marginalized and remote communities facing complex development and environmental challenges. My expertise includes knowledge management, stakeholder engagement, digital communication, environmental education and intercultural communication. I specialize in translating technical scientific findings into clear and accessible information for non-technical audiences, helping bridge the gap between complex environmental data and practical decision-making.
+
+Building on these experiences, I am pursuing a professional degree in Environmental Data Science to deepen my ability to apply data-driven approaches to environmental communication. I use machine learning, predictive modeling and visualization techniques to develop interactive tools that address environmental and social concerns while supporting sustainability and community needs.
