@@ -66,3 +66,8 @@ The innovative digital tools, such as mobile apps and cloud-based platforms, can
 Finally, capacity building and ethical training for field staff can help mitigate confirmation and observer biases. The technicians should understand that carbon stocks can increase or decrease, and that uncertainty is an inherent part of forest monitoring. Training in data ethics, handling uncertainty and standardized scoring procedures promotes reliable data collection and discourages intentional or unconscious misreporting (Zvereva & Kozlov, 2021; Vera et al., 2019).
 
 By combining technical rigor, digital tools, independent oversight, and inclusive governance, forest carbon inventories can produce accurate and transparent outputs, supporting credible REDD+ accounting, reliable policy decisions and equitable outcomes for communities.
+
+## References
+
+::: {#refs}
+:::
