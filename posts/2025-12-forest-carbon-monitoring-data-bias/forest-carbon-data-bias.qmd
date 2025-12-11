@@ -12,7 +12,7 @@ format:
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-forest-carbon-monitoring-data-bias/
 categories: [MEDS, environmental data, data bias, data ethics, forest carbon monitoring, data science]
-image: fcm.png
+image: forest-carbon-sequestration.png
 draft: false
 bibliography: references.bib
 nocite: '@*'
@@ -22,7 +22,7 @@ nocite: '@*'
 
 Imagine a community that has spent years protecting and managing their forests sustainably, expecting fair compensation for the carbon they have successfully sequestered. Now picture their entire payment depends on a dataset collected by forest technicians, and one flawed spreadsheet threatens to collapse the credibility of their effort. This was the reality I faced while working on one of the forest conservation and sustainable management projects. The project operated under an international climate change framework designed to reward developing countries for ‘Reducing Emissions from Deforestation and Forest Degradation’ (REDD+). Forest carbon assessments are fundamental part of REDD+, serving as the sole measure to determine whether communities and governments receive performance-based payments. Yet, despite the scientific precision these carbon inventories require, data can fail in very human ways. What I witnessed was not a theoretical issue discussed in the literature, it was a real case of biased and inconsistent data fabrication that nearly undermined the entire project.
 
-![Source: Forest carbon platform overview, Forest carbon monitoring consortium (2025)](fcm.png)
+![Source: musimmas.com, How do forests sequester and absorb carbon?](carbon-cycle.jpeg)
 
 ## Measuring the forests
 
@@ -51,6 +51,8 @@ These issues reflect broader patterns in biodiversity and forestry research, whe
 ## Real world impacts of data bias
 
 In the Year 3 forest carbon inventory, biases in measurement, metadata, procedural judgments, and misclassification directly affected the carbon stock estimates (Burt et al., 2020; Konno et al., 2024; Zvereva & Kozlov, 2021). Inflated or biologically implausible values could have led to inaccurate REDD+ carbon accounting, misinformed management decisions, and unreliable performance reports. These errors also risked undermining donor trust, misallocating conservation resources, and weakening the long-term credibility of the forest monitoring system.
+
+![Source: breadfruitonline.com, Enhancing global carbon dioxide mitigation through forest carbon sequestration](forest-carbon-sequestration.png)
 
 ## Insights from forest carbon monitoring
 
