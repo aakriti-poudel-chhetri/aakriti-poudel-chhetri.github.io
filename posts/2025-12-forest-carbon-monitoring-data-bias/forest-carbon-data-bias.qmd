@@ -1,5 +1,5 @@
 ---
-title: "Forest carbon monitoring: Human errors and data Bias"
+title: "Forest carbon monitoring: Human errors and data bias"
 description: "When forest conservation effort meets data errors"
 author:
   - name: Aakriti Poudel
