@@ -154,7 +154,7 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 ## Visualize the model
 
 ```{r}
-#| label: fig-emitting-countries
+#| label: model
 #| fig-cap: "Figure 1: Negative Binomial Model"
 
 # Create predictions from the model
@@ -370,12 +370,12 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
 
 # Visualize top ten countries with increasing GDP
 ggplot(power_gdp_mean_gdp, aes(x = year, y = mean, color = country_name)) +
-  geom_line(linewidth = 1) +
-  geom_point(linewidth = 1) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
   scale_x_continuous(breaks = seq(2015, 2024, by = 1)) +
-  scale_y_continuous(labels = scales::label_number(scale = 1e-10, suffix = "B")) +
+  scale_y_continuous(labels = label_number(scale = 1e-9, suffix = "B")) + # corrected scale
   labs(
-    title = "Mean GDP of Top 10 Countries (2015–2024)",
+    title = "Mean GDP of top 10 Countries (2015–2024)",
     x = "Year",
     y = "Mean GDP",
     color = "Country"
@@ -436,7 +436,7 @@ decoupling_case <- decoupling %>%
 ### Visualize top ten countries with decoupling effects
 
 ```{r}
-#| label: fig-increasing-gdp-countries
+#| label: decoupling-countries
 #| fig-cap: "Figure 4: The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
 
 # Filter the top ten countries with decoupling effects
@@ -575,7 +575,7 @@ We should note that the prediction grid creates a set of hypothetical scenarios 
 ## Visualize the model prediction
 
 ```{r}
-#| label: fig-increasing-gdp-countries
+#| label: model-prediction
 #| fig-cap: "The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
 
 
