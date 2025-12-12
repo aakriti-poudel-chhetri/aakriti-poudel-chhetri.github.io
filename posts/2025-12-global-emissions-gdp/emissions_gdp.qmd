@@ -61,7 +61,7 @@ library(scales)
 
 ```{r}
 #| label: Directed Acyclic Graph (DAG)
-#| fig-cap: "The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
+#| fig-cap: "Figure 1: The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
 #| echo: false
 
 dag <- dagitty("
@@ -153,7 +153,7 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 
 ```{r}
 #| label: model
-#| fig-cap: "Figure 1: Negative Binomial Model"
+#| fig-cap: "Figure 2: Negative Binomial Model"
 
 # Create predictions from the model
 my_data$prediction <- predict(negbinomial, type = "response")
@@ -317,7 +317,7 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
 
 ```{r}
 #| label: fig-emitting-countries
-#| fig-cap: "Figure 2: The plot shows the annual mean carbon emissions from 2015 to 2024 for the ten highest-emitting countries. This allows us to visualize trends over time."
+#| fig-cap: "Figure 3: The plot shows the annual mean carbon emissions from 2015 to 2024 for the ten highest-emitting countries. This allows us to visualize trends over time."
 
 # Visualize top ten emitting countries
  ggplot(power_gdp_mean_top10, aes(x = year, y = mean, color = country_name)) +
@@ -331,7 +331,7 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
   theme_classic()
 ```
 
-The figure 2 shows that the highest‐emitting countries are China, United States, India, Russia, Japan, Saudi Arabia, Indonesia, South Africa, Korea and Iran.
+The figure 3 shows that the highest‐emitting countries are China, United States, India, Russia, Japan, Saudi Arabia, Indonesia, South Africa, Korea and Iran.
 
 ## Identify top ten countries with increasing GDP from year 2015 to 2024
 
@@ -364,7 +364,7 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
 
 ```{r}
 #| label: fig-increasing-gdp-countries
-#| fig-cap: "Figure 3: The plot shows the annual mean GDP from 2015 to 2024 for the ten countries with the highest GDP. This allows us to visualize economic growth trends over time."
+#| fig-cap: "Figure 4: The plot shows the annual mean GDP from 2015 to 2024 for the ten countries with the highest GDP. This allows us to visualize economic growth trends over time."
 
 # Visualize top ten countries with increasing GDP
 suppressWarnings({
@@ -389,7 +389,7 @@ suppressWarnings({
 
 ```
 
-The figure 3 indicates that the countries with the highest GDP are United States, China, Japan, Germany, the United Kingdom, India, France, Italy, Brazil and Canada.
+The figure 4 indicates that the countries with the highest GDP are United States, China, Japan, Germany, the United Kingdom, India, France, Italy, Brazil and Canada.
 
 ## Calculate GDP and emissions changes
 
@@ -437,7 +437,7 @@ decoupling_case <- decoupling %>%
 
 ```{r}
 #| label: decoupling-countries
-#| fig-cap: "Figure 4: The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
+#| fig-cap: "Figure 5: The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
 
 # Filter the top ten countries with decoupling effects
 decoup_ten <- decoupling_case %>%
@@ -458,7 +458,7 @@ ggplot(decoup_ten, aes(x = reorder(country_name, decoupling_years),
 
 ```
 
-The figure 4 highlights the countries that achieved the decoupling case: Ireland, Romania, Bulgaria, Luxembourg, the Netherlands, Poland, Portugal, Ukraine, United States and Australia.
+The figure 5 highlights the countries that achieved the decoupling case: Ireland, Romania, Bulgaria, Luxembourg, the Netherlands, Poland, Portugal, Ukraine, United States and Australia.
 
 ### Interpretation of data analysis
 
@@ -467,7 +467,6 @@ These figures show an interesting relationship between economic growth and globa
 # Fit GDP and emissions data into a model
 
 We fit GDP and emissions data into a negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
-
 
 $$
 \begin{align}
@@ -577,7 +576,7 @@ We should note that the prediction grid creates a set of hypothetical scenarios 
 
 ```{r}
 #| label: model-prediction
-#| fig-cap: "The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
+#| fig-cap: "Figure 6: The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
 
 
 # Plot with single ribbon
