@@ -412,6 +412,10 @@ warning("Update coordinate reference systems to match!")
 By aligning the coordinate systems and cropping to the Houston study area, census tracts and blackout affected houses are prepared for spatial comparison. Intersections between the two datasets identify which tracts experienced power outages, and a new column flags these impacted areas. Filtering to only the affected tracts enables a targeted analysis and visualization of how the blackout influenced neighborhoods across the city.
 
 ```{r}
+#| output: false
+#| warning: false
+#| message: false
+
 # Transform the CRS and crop to houston bounding box
 census_income <- st_transform(census_income, crs = 'epsg:4326') 
 
@@ -438,9 +442,7 @@ census_blackout_col_filtered <- census_blackout_col[census_blackout_col$blackout
 Visualize the census tracts in Houston that experienced power outages on a map.
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 5
-#| label: fig-impacted-house
+#| label: fig-census-tract
 #| fig-cap: "The following map highlights Houston census tracts that experienced power outages during the February 2021 winter storms. Affected tracts are shown in red, providing a clear visualization of the spatial distribution of blackouts across the city. This allows for easy identification of neighborhoods impacted by the storm and supports further analysis of socioeconomic patterns in relation to power loss."
 
 # Map the census tracts that lost power
@@ -502,3 +504,8 @@ This analysis used satellite nighttime light data to identify which parts of Hou
 # Next steps
 
 While blackout exposure appeared similar across income levels, the ability to cope with and recover from outages is not equal. Low income communities have fewer resources to stay warm, relocate or rebound after a long outage. This difference between exposure and impact is important for understanding who is most vulnerable during extreme weather events. Future work should use nighttime light data from more days to better track outage duration and recovery. Adding other socioeconomic information, such as age, housing quality, or access to transportation, can improve our understanding of community vulnerability. Combining multiple sources like utility outage records, mobile phone mobility data and satellite imagery would create a more complete picture of who was affected and how. Examining infrastructure characteristics, such as the age of power lines or the placement of substations, may also help explain differences in recovery across neighborhoods. Together, these steps can help identify communities at higher risk and support more effective and equitable preparation for future extreme weather events.
+
+## References
+
+::: {#refs}
+:::
