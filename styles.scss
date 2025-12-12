@@ -25,7 +25,7 @@ $font-size-base: 1.0rem !default;  //
 $font-family-base: "EB Garamond", serif !default;  //
 
 // Heading font sizes
-$h1-font-size: 2.5rem !default;    // Page title (largest)
+$h1-font-size: 2.0rem !default;    // Page title (largest)
 $h2-font-size: 1.8rem !default;    // Main section headers
 $h3-font-size: 1.6rem !default;   // Subsection headers
 $h4-font-size: 1.4rem !default;    // Sub-subsection headers
@@ -72,4 +72,12 @@ h1, h2 {
 
 .orange_text {
   color: orange;
+}
+
+/* Increase size of References heading */
+#refs h2 {
+  font-size: 2.0rem;      // adjust as needed
+  font-weight: 700;        // bold
+  margin-top: 1.5em;       // space above
+  color: $dark-gray;       // optional, matches your headings
 }
