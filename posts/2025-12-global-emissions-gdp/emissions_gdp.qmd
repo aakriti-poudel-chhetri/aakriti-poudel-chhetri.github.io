@@ -17,6 +17,13 @@ draft: false
 #bibliography: references.bib
 ---
 
+```{r setup, include=FALSE}
+library(knitr)
+# Set the working directory for all chunks
+opts_knit$set(root.dir = "/Users/aakriti/Documents/MEDS/My website/aakriti-poudel-chhetri.github.io")
+```
+
+
 # Introduction
 
 Can a country reduce emissions while growing its GDP? This question has gained significant attention in recent years as all countries globally are trying to achieve the economic development with maintaining environmental sustainability. In this assignment, we examine global power-sector emissions and GDP data from more than 200 countries to explore whether sustained economic growth can occur alongside meaningful emission reductions.
@@ -329,9 +336,10 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
        title = "Top ten emitting countries from 2015 to 2024",
        color = "Country") +
   theme_classic()
+
 ```
 
-The figure 3 shows that the highest‐emitting countries are China, United States, India, Russia, Japan, Saudi Arabia, Indonesia, South Africa, Korea and Iran.
+Figure 3 shows that the highest‐emitting countries are China, United States, India, Russia, Japan, Saudi Arabia, Indonesia, South Africa, Korea and Iran.
 
 ## Identify top ten countries with increasing GDP from year 2015 to 2024
 
@@ -389,7 +397,7 @@ suppressWarnings({
 
 ```
 
-The figure 4 indicates that the countries with the highest GDP are United States, China, Japan, Germany, the United Kingdom, India, France, Italy, Brazil and Canada.
+Figure 4 indicates that the countries with the highest GDP are United States, China, Japan, Germany, the United Kingdom, India, France, Italy, Brazil and Canada.
 
 ## Calculate GDP and emissions changes
 
@@ -458,7 +466,7 @@ ggplot(decoup_ten, aes(x = reorder(country_name, decoupling_years),
 
 ```
 
-The figure 5 highlights the countries that achieved the decoupling case: Ireland, Romania, Bulgaria, Luxembourg, the Netherlands, Poland, Portugal, Ukraine, United States and Australia.
+Figure 5 highlights the countries that achieved the decoupling case: Ireland, Romania, Bulgaria, Luxembourg, the Netherlands, Poland, Portugal, Ukraine, United States and Australia.
 
 ### Interpretation of data analysis
 
@@ -470,12 +478,10 @@ We fit GDP and emissions data into the following negative binomial model to quan
 
 $$
 \begin{align}
-\text{decoupling_years} &\sim NegativeBinomial(\mu, \theta) \\
-log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_gdp_growth}
+\text{decoupling_years} &\sim \text{NegativeBinomial}(\mu, \theta) \\ 
+\log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_gdp_growth}
 \end{align}
-\\
 $$
-
 Now, let's fit our decoupling years in the negative binomial model.
 
 ```{r}
