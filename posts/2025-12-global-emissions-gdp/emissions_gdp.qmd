@@ -12,8 +12,9 @@ format:
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-global-emissions-gdp/
 categories: [MEDS, R, environment modeling, statistics, data science]
-image: dag-emission-gdp.png
+image: eaton-palisades-fires.png
 draft: false
+#bibliography: references.bib
 ---
 
 # Introduction
@@ -32,6 +33,8 @@ First, let's load all the required libraries.
 #| output: false
 #| warning: false
 #| message: false
+
+set.seed(123)
 
 # Load libraries
 library(tidyverse)
@@ -151,7 +154,8 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 ## Visualize the model
 
 ```{r}
-library(ggplot2)
+#| label: fig-emitting-countries
+#| fig-cap: "Figure 1: Negative Binomial Model"
 
 # Create predictions from the model
 my_data$prediction <- predict(negbinomial, type = "response")
@@ -177,8 +181,6 @@ ggplot(my_data, aes(x = x, y = y)) +
 }
 ```
 
-Let's check the coefficients of this model.
-
 ```{r}
 # Summarize the model in a table
 negbinomial_summary <- list ("Negative Binomial" = glm.nb(y ~ x, data = my_data))
@@ -199,9 +201,9 @@ The coefficients from our simulation are almost same as the ones we used initial
 
 | Coefficients | Set up | Simulated |
 |--------------|--------|-----------|
-| beta0        | 0.6    | 0.61      |
-| beta1        | 1.8    | 1.79      |
-| theta        | 2      | 1.97      |
+| beta0        | 0.6    | 0.58      |
+| beta1        | 1.8    | 1.80      |
+| theta        | 2      | 2.00      |
 
 Now, we can run the negative binomial regression on our real data.
 
@@ -316,7 +318,7 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
 ### Visualize top ten 10 emitting countries
 
 ```{r}
- #| label: fig-emitting-countries
+#| label: fig-emitting-countries
 #| fig-cap: "Figure 2: The plot shows the annual mean carbon emissions from 2015 to 2024 for the ten highest-emitting countries. This allows us to visualize trends over time."
 
 # Visualize top ten emitting countries
@@ -335,7 +337,7 @@ The figure 2 shows that the highest‐emitting countries are China, United State
 
 ## Identify top ten countries with increasing GDP from year 2015 to 2024
 
-### Calculate top ten countries with increasing GDP 
+### Calculate top ten countries with increasing GDP
 
 We again identify the ten countries that have experienced increasing GDP over the past decade, from 2015 to 2024. This helps us highlight consistent economic growth trends and examine their potential impacts on energy consumption.
 
@@ -360,7 +362,7 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
   filter(country_name %in% top_10_gdp$country_name)
 ```
 
-### Visualize top ten countries with increasing GDP 
+### Visualize top ten countries with increasing GDP
 
 ```{r}
 #| label: fig-increasing-gdp-countries
@@ -368,8 +370,8 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
 
 # Visualize top ten countries with increasing GDP
 ggplot(power_gdp_mean_gdp, aes(x = year, y = mean, color = country_name)) +
-  geom_line(size = 1) +
-  geom_point(size = 2) +
+  geom_line(linewidth = 1) +
+  geom_point(linewidth = 1) +
   scale_x_continuous(breaks = seq(2015, 2024, by = 1)) +
   scale_y_continuous(labels = scales::label_number(scale = 1e-10, suffix = "B")) +
   labs(
@@ -396,7 +398,7 @@ We calculate the total GDP and carbon emissions for each country by year and com
 ```{r}
 # Aggregate GDP and emissions by country and year
 country_totals <- power_gdp %>%
-  group_by(country_name, country_code, subsector, year) %>%
+  group_by(country_name, country_code, year) %>%
   summarize(total_emissions = sum(emissions_quantity, na.rm = TRUE),
             gdp_values = first(gdp_values),
             .groups = 'drop')
@@ -473,6 +475,7 @@ log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_
 \end{align}
 \\
 $$
+
 Now, let's fit our decoupling case in the negative binomial model.
 
 ```{r}
@@ -522,19 +525,19 @@ theta_value <- nb_model$theta
 theta_value
 ```
 
-The estimated dispersion parameter theta is extremely large at ~ 59,399, which indicates that the data has almost no overdispersion. A theta of this magnitude suggests that the variance of the outcome is very close to the mean.
+The estimated dispersion parameter theta is extremely large at ~ 59,399.34, which indicates that the data has almost no overdispersion. A theta of this magnitude suggests that the variance of the outcome is very close to the mean.
 
 ## Interpretation of the Coefficients
 
 Here, we will interpret the coefficients of our model. The coefficients of the negative binomial regression show that both average GDP growth and average emission reduction have weak relationships with the decoupling year.
 
-The intercept coefficient of 1.0423 is statistically significant  at p < 0.0001 and represents the expected log count of decoupling year when both GDP growth and emission reduction are at zero.
+The intercept coefficient of 1.0423 is statistically significant at p < 0.001 and represents the expected log count of decoupling year when both GDP growth and emission reduction are at zero. This means that when both GDP growth and emission reduction are zero, the expected number of decoupling years is ~ 2.84.
 
 The coefficient for average GDP growth is -0.0141, and its p-value (0.0587) shows that this relationship is not strong enough to be considered statistically significant at the 5% level. This negative coefficient suggests that for every one unit increase in average GDP growth, the expected log count of decoupling years decreases by 0.0141, when emission reduction is held constant.
 
 The coefficient for average emission reduction is -0.0090, which is marginally significant at p = 0.0523. This indicates that for every one unit increase in emission reduction, the expected log count of decoupling year decreases by 0.0090.
 
-This provides evidence for the challenges of achieving decoupling discussed above in the data analysis section. The negative relationship between GDP growth and decoupling years indicates that countries with rapid economic growth may face greater difficulty in sustaining decoupling. This could mean that faster growth increases energy demand and industrial activity that overtakes  emission reduction efforts. It could also suggest the presence of confounding variable that need further investigation. Given our observation that only United States achieved true decoupling between 2015 and 2024, these marginal effects align with the overall narrative that balancing economic growth with meaningful emissions reductions remains exceptionally challenging for most countries.
+This provides evidence for the challenges of achieving decoupling discussed above in the data analysis section. The negative relationship between GDP growth and decoupling years indicates that countries with rapid economic growth may face greater difficulty in sustaining decoupling. This could mean that faster growth increases energy demand and industrial activity that overtakes emission reduction efforts. It could also suggest the presence of confounding variable that need further investigation. Given our observation that only United States achieved true decoupling between 2015 and 2024, these marginal effects align with the overall narrative that balancing economic growth with meaningful emissions reductions remains exceptionally challenging for most countries.
 
 # Create prediction data for GDP and emissions
 
@@ -600,10 +603,11 @@ ggplot() +
 ```
 
 ## Interpretation of the confidence interval
-The width of the confidence intervals generally  indicates how certain the model is about its predictions. A narrower confidence interval means more confidence. A wider confidence interval means greater uncertainty. Since, our confidence interval is wider here, the model is less certain about predictions for very low or very high GDP growth rates because there are very fewer observations in those ranges.
+
+The width of the confidence intervals generally indicates how certain the model is about its predictions. A narrower confidence interval means more confidence. A wider confidence interval means greater uncertainty. Since, our confidence interval is wider here, the model is less certain about predictions for very low or very high GDP growth rates because there are very fewer observations in those ranges.
 
 # Conclusion
 
 We conclude that we fail to reject the null hypothesis.
 
-This study shows how economic growth and environmental sustainability are related. It highlights the global challenge of effective climate action. Although countries like China, United States and India rank high in both emissions and GDP because of their large economies and intensive industrial activity, only United States was able to achieve decoupling between 2015 and 2024. This means that most countries struggled to grow their economies while also reducing emissions. The results suggest that when economies expand, they increase energy use, technology use and industrial activity, the confounding variables that may indirectly influence emissions. These activities often grow faster than emission reduction efforts. Among the top ten countries that showed decoupling, only one achieved it, showing how rare environmental-economic decoupling still is. Overall, the findings suggest that achieving decoupling requires stronger policies, new technologies and long-term economic changes that allow countries to grow without harming the environment.
+This study shows how economic growth and environmental sustainability are related. It highlights the global challenge of effective climate action. Although countries like China, United States and India rank high in both emissions and GDP because of their large economies and intensive industrial activity, only United States was able to achieve decoupling between 2015 and 2024. This means that most countries struggled to grow their economies while also reducing emissions. The results suggest that when economies expand, they increase energy use, technology use and industrial activity, the confounding variables that may indirectly influence emissions. These activities often grow faster than emission reduction efforts. Among the top ten countries that showed decoupling, only one achieved it, showing how rare environmental-economic decoupling still is. Overall, the findings suggest that achieving decoupling requires stronger policies, new technologies and long-term economic changes that allow countries to grow without harming the environment. \`\`\`{r}
