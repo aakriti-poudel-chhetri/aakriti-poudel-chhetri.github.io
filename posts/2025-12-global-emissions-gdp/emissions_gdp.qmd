@@ -9,7 +9,7 @@ format:
   html:
     code-fold: true
     embed-resources: true
-    math: mathjax
+    fig-number: true     
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-global-emissions-gdp/
 categories: [MEDS, R, environment modeling, statistics, data science]
@@ -20,8 +20,9 @@ draft: false
 
 ```{r setup, include=FALSE}
 library(knitr)
-# Set the working directory for all chunks
+# Working directory for all chunks
 opts_knit$set(root.dir = "/Users/aakriti/Documents/MEDS/My website/aakriti-poudel-chhetri.github.io")
+
 ```
 
 # Introduction
@@ -67,7 +68,7 @@ library(scales)
 | GDP Growth         | GDP          |
 
 ```{r}
-#| label: Directed Acyclic Graph (DAG)
+#| label: fig-dag
 #| fig-cap: "The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
 #| echo: false
 
@@ -159,7 +160,7 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 ## Visualize the model
 
 ```{r}
-#| label: model
+#| label: fig-model
 #| fig-cap: "Negative Binomial Model"
 
 # Create predictions from the model
@@ -173,6 +174,7 @@ ggplot(my_data, aes(x = x, y = y)) +
        x = "X axis",
        y = "Y axis") +
   theme_minimal()
+
 ```
 
 ## Extract coefficient of the tested model
@@ -444,7 +446,7 @@ decoupling_case <- decoupling %>%
 ### Visualize top ten countries with decoupling effects
 
 ```{r}
-#| label: decoupling-countries
+#| label: fig-decoupling-countries
 #| fig-cap: "The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
 
 # Filter the top ten countries with decoupling effects
@@ -474,14 +476,16 @@ These figures show an interesting relationship between economic growth and globa
 
 # Fit GDP and emissions data into a model
 
-We fit GDP and emissions data into the following negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
+We fit GDP and emissions data into the negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
 
 $$
 \begin{align}
-\text{decoupling_years} &\sim \text{NegativeBinomial}(\mu, \theta) \\ 
-\log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_gdp_growth}
+\text{decoupling\_years} &\sim \text{NegativeBinomial}(\mu, \theta) \\
+\log(\mu) &= \beta_0 + \beta_1\,\text{avg\_emission\_reduction} + \beta_2\,\text{avg\_gdp\_growth}
 \end{align}
-$$ Now, let's fit our decoupling years in the negative binomial model.
+$$
+
+Now, let's fit our decoupling years in the negative binomial model.
 
 ```{r}
 #| output: false
@@ -580,7 +584,7 @@ We should note that the prediction grid creates a set of hypothetical scenarios 
 ## Visualize the model prediction
 
 ```{r}
-#| label: model-prediction
+#| label: fig-model-prediction
 #| fig-cap: "The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
 
 
