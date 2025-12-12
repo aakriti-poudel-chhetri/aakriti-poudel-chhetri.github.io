@@ -466,7 +466,7 @@ These figures show an interesting relationship between economic growth and globa
 
 # Fit GDP and emissions data into a model
 
-We fit GDP and emissions data into a negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
+We fit GDP and emissions data into the following negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
 
 $$
 \begin{align}
