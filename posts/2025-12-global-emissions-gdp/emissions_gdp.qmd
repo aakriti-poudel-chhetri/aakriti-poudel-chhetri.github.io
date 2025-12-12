@@ -9,6 +9,7 @@ format:
   html:
     code-fold: true
     embed-resources: true
+    math: mathjax
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-global-emissions-gdp/
 categories: [MEDS, R, environment modeling, statistics, data science]
@@ -22,7 +23,6 @@ library(knitr)
 # Set the working directory for all chunks
 opts_knit$set(root.dir = "/Users/aakriti/Documents/MEDS/My website/aakriti-poudel-chhetri.github.io")
 ```
-
 
 # Introduction
 
@@ -68,7 +68,7 @@ library(scales)
 
 ```{r}
 #| label: Directed Acyclic Graph (DAG)
-#| fig-cap: "Figure 1: The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
+#| fig-cap: "The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
 #| echo: false
 
 dag <- dagitty("
@@ -160,7 +160,7 @@ negbinomial <- glm.nb(y ~ x, data = my_data)
 
 ```{r}
 #| label: model
-#| fig-cap: "Figure 2: Negative Binomial Model"
+#| fig-cap: "Negative Binomial Model"
 
 # Create predictions from the model
 my_data$prediction <- predict(negbinomial, type = "response")
@@ -324,7 +324,7 @@ power_gdp_mean_top10 <- power_gdp_mean %>%
 
 ```{r}
 #| label: fig-emitting-countries
-#| fig-cap: "Figure 3: The plot shows the annual mean carbon emissions from 2015 to 2024 for the ten highest-emitting countries. This allows us to visualize trends over time."
+#| fig-cap: "The plot shows the annual mean carbon emissions from 2015 to 2024 for the ten highest-emitting countries. This allows us to visualize trends over time."
 
 # Visualize top ten emitting countries
  ggplot(power_gdp_mean_top10, aes(x = year, y = mean, color = country_name)) +
@@ -372,7 +372,7 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
 
 ```{r}
 #| label: fig-increasing-gdp-countries
-#| fig-cap: "Figure 4: The plot shows the annual mean GDP from 2015 to 2024 for the ten countries with the highest GDP. This allows us to visualize economic growth trends over time."
+#| fig-cap: "The plot shows the annual mean GDP from 2015 to 2024 for the ten countries with the highest GDP. This allows us to visualize economic growth trends over time."
 
 # Visualize top ten countries with increasing GDP
 suppressWarnings({
@@ -445,7 +445,7 @@ decoupling_case <- decoupling %>%
 
 ```{r}
 #| label: decoupling-countries
-#| fig-cap: "Figure 5: The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
+#| fig-cap: "The plot shows the top ten countries with the most years where GDP increased and carbon emissions decreased. Each bar represents the number of years a country experienced this decoupling effect."
 
 # Filter the top ten countries with decoupling effects
 decoup_ten <- decoupling_case %>%
@@ -481,8 +481,7 @@ $$
 \text{decoupling_years} &\sim \text{NegativeBinomial}(\mu, \theta) \\ 
 \log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_gdp_growth}
 \end{align}
-$$
-Now, let's fit our decoupling years in the negative binomial model.
+$$ Now, let's fit our decoupling years in the negative binomial model.
 
 ```{r}
 #| output: false
@@ -531,13 +530,13 @@ theta_value <- nb_model$theta
 theta_value
 ```
 
-The estimated dispersion parameter theta is extremely large at ~ 59,399.34, which indicates that the data has almost no overdispersion. A theta of this magnitude suggests that the variance of the outcome is very close to the mean.
+The estimated dispersion parameter theta is extremely large at \~ 59,399.34, which indicates that the data has almost no overdispersion. A theta of this magnitude suggests that the variance of the outcome is very close to the mean.
 
 ## Interpretation of the Coefficients
 
 Here, we will interpret the coefficients of our model. The coefficients of the negative binomial regression show that both average GDP growth and average emission reduction have weak relationships with the decoupling year.
 
-The intercept coefficient of 1.0423 is statistically significant at p < 0.001 and represents the expected log count of decoupling year when both GDP growth and emission reduction are at zero. This means that when both GDP growth and emission reduction are zero, the expected number of decoupling years is ~ 2.84.
+The intercept coefficient of 1.0423 is statistically significant at p \< 0.001 and represents the expected log count of decoupling year when both GDP growth and emission reduction are at zero. This means that when both GDP growth and emission reduction are zero, the expected number of decoupling years is \~ 2.84.
 
 The coefficient for average GDP growth is -0.0141, and its p-value (0.0587) shows that this relationship is not strong enough to be considered statistically significant at the 5% level. This negative coefficient suggests that for every one unit increase in average GDP growth, the expected log count of decoupling years decreases by 0.0141, when emission reduction is held constant.
 
@@ -582,7 +581,7 @@ We should note that the prediction grid creates a set of hypothetical scenarios 
 
 ```{r}
 #| label: model-prediction
-#| fig-cap: "Figure 6: The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
+#| fig-cap: "The plot visualizes the model predictions for the number of decoupling years as GDP increases and emission decreases. The pink line shows the predicted values of declining emissions, the shaded blue area represents the 95% confidence interval at the mean emission reduction, and the green points indicate the observed decoupling cases for each country."
 
 
 # Plot with single ribbon
