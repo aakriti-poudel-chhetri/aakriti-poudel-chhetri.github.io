@@ -12,7 +12,7 @@ format:
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-global-emissions-gdp/
 categories: [MEDS, R, environment modeling, statistics, data science]
-image: eaton-palisades-fires.png
+image: emissions.jpg
 draft: false
 #bibliography: references.bib
 ---
@@ -50,8 +50,6 @@ library(scales)
 
 # Directed Acyclic Graph (DAG)
 
-The following DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY) . The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias.
-
 | Variables          | Abbreviation |
 |--------------------|--------------|
 | Economy            | EC           |
@@ -63,7 +61,7 @@ The following DAG describes the key relationships between emissions and GDP. It 
 
 ```{r}
 #| label: Directed Acyclic Graph (DAG)
-#| fig-cap: "Directed Acyclic Graph (DAG)"
+#| fig-cap: "The above DAG describes the key relationships between emissions and GDP. It shows how the Economy (EC), Energy use (EU) and Technology (T) interact to shape both Emissions quantity (EQ), GDP growth (GDP) and Decoupling year (DY). The economy influences energy use, technological development and emissions. Energy use also contributes to technological change, which then affects both emissions and GDP. The decoupling is both affected by the emissions and GDP. Overall, the DAG highlights the **direct and indirect connections** among these variables and helps identify which variable need to be controlled in the analysis to reduce confounding and selection bias."
 #| echo: false
 
 dag <- dagitty("
@@ -369,23 +367,25 @@ power_gdp_mean_gdp <- power_gdp_mean %>%
 #| fig-cap: "Figure 3: The plot shows the annual mean GDP from 2015 to 2024 for the ten countries with the highest GDP. This allows us to visualize economic growth trends over time."
 
 # Visualize top ten countries with increasing GDP
-ggplot(power_gdp_mean_gdp, aes(x = year, y = mean, color = country_name)) +
-  geom_line(size = 1) +
-  geom_point(size = 2) +
-  scale_x_continuous(breaks = seq(2015, 2024, by = 1)) +
-  scale_y_continuous(labels = label_number(scale = 1e-9, suffix = "B")) + # corrected scale
-  labs(
-    title = "Mean GDP of top 10 Countries (2015–2024)",
-    x = "Year",
-    y = "Mean GDP",
-    color = "Country"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 12),
-    legend.title = element_text(size = 12)
-  )
+suppressWarnings({
+  ggplot(power_gdp_mean_gdp, aes(x = year, y = mean, color = country_name)) +
+    geom_line(linewidth = 1) +  # use the new correct argument
+    geom_point(size = 2) +      # points still use size
+    scale_x_continuous(breaks = seq(2015, 2024, by = 1)) +
+    scale_y_continuous(labels = scales::label_number(scale = 1e-9, suffix = "B")) +
+    labs(
+      title = "Mean GDP of Top 10 Countries (2015–2024)",
+      x = "Year",
+      y = "Mean GDP",
+      color = "Country"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
+      axis.title = element_text(size = 12),
+      legend.title = element_text(size = 12)
+    )
+})
 
 ```
 
@@ -468,6 +468,7 @@ These figures show an interesting relationship between economic growth and globa
 
 We fit GDP and emissions data into a negative binomial model to quantify the relationship between economic growth and carbon emissions. This allows us to understand whether changes in GDP are associated with changes in emissions and to make predictions or draw inferences based on the model.
 
+
 $$
 \begin{align}
 \text{decoupling_years} &\sim NegativeBinomial(\mu, \theta) \\
@@ -476,7 +477,7 @@ log(\mu) &= \beta_0 + \beta_1 \text{avg_emission_reduction} + \beta_2 \text{avg_
 \\
 $$
 
-Now, let's fit our decoupling case in the negative binomial model.
+Now, let's fit our decoupling years in the negative binomial model.
 
 ```{r}
 #| output: false
@@ -610,4 +611,4 @@ The width of the confidence intervals generally indicates how certain the model 
 
 We conclude that we fail to reject the null hypothesis.
 
-This study shows how economic growth and environmental sustainability are related. It highlights the global challenge of effective climate action. Although countries like China, United States and India rank high in both emissions and GDP because of their large economies and intensive industrial activity, only United States was able to achieve decoupling between 2015 and 2024. This means that most countries struggled to grow their economies while also reducing emissions. The results suggest that when economies expand, they increase energy use, technology use and industrial activity, the confounding variables that may indirectly influence emissions. These activities often grow faster than emission reduction efforts. Among the top ten countries that showed decoupling, only one achieved it, showing how rare environmental-economic decoupling still is. Overall, the findings suggest that achieving decoupling requires stronger policies, new technologies and long-term economic changes that allow countries to grow without harming the environment. \`\`\`{r}
+This study shows how economic growth and environmental sustainability are related. It highlights the global challenge of effective climate action. Although countries like China, United States and India rank high in both emissions and GDP because of their large economies and intensive industrial activity, only United States was able to achieve decoupling between 2015 and 2024. This means that most countries struggled to grow their economies while also reducing emissions. The results suggest that when economies expand, they increase energy use, technology use and industrial activity, the confounding variables that may indirectly influence emissions. These activities often grow faster than emission reduction efforts. Among the top ten countries that showed decoupling, only one achieved it, showing how rare environmental-economic decoupling still is. Overall, the findings suggest that achieving decoupling requires stronger policies, new technologies and long-term economic changes that allow countries to grow without harming the environment.
