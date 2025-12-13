@@ -168,7 +168,7 @@ Here, we visualize the comparison between night-light intensities in Houston bef
 #| label: fig-before-after
 #| fig-cap: "Comparison of Houston night light intensity before and after the winter storm, February 2021"
 
-#tmap_options(component.autoscale = FALSE)
+tmap_options(component.autoscale = FALSE)
 
 # Map for February 7 (before storm)
 beforestorm <- tm_shape(nightlight_07_crop) +
