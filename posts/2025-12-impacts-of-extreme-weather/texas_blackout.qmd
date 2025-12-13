@@ -168,65 +168,39 @@ Here, we visualize the comparison between night-light intensities in Houston bef
 #| label: fig-before-after
 #| fig-cap: "Comparison of Houston night light intensity before and after the winter storm, February 2021"
 
-tmap_options(component.autoscale = FALSE)
+#tmap_options(component.autoscale = FALSE)
 
 # Map for February 7 (before storm)
 beforestorm <- tm_shape(nightlight_07_crop) +
   tm_raster(col.scale = tm_scale_continuous(values = 'inferno'),
-            col.legend = tm_legend(show = TRUE, 
-                                   title = 'Night light intensity before storm',
-                                   title.size = 1,
+            col.legend = tm_legend(title = 'Night light intensity before storm',
+                                   title.size = 0.8,
+                                   labels.size = 0.7,
                                    orientation = 'landscape',
-                                   width = 35,
-                                   height = 3,
-                                   legend.just = c(0, 1)))+
+                                   width = 30,
+                                   height = 2.5))+
   tm_title('Houston Night Lights\nFebruary 07, 2021 (Before storm)',
-           size = 1.2, fontface = 'bold') +
-  tm_compass(position = c('left', 'bottom'),
-             type = 'arrow',
-             size = 1.5,
-             text.size = 0.7,
-             color.dark = 'grey50',
-             text.color = 'white') +  
-  tm_scalebar(position = c('left', 'bottom'),
-              text.size = 0.8,
-              color.dark = 'grey50',
-              text.color = 'white') +  
+           size = 1, fontface = 'bold') +
   tm_layout(bg.color = 'white',           
-            outer.bg.color = 'white',      
-            frame = TRUE,
-            legend.show = TRUE) +
+            outer.bg.color = 'white',
+            frame = FALSE,
+            legend.frame = FALSE) +
   tm_graticules(x.show = TRUE, y.show = FALSE, lwd = 0.2, col = "white", alpha = 0.3, labels.size = 0.5)
   
-  
-  #tm_graticules(lwd = 0.2, col = "white", alpha = 0.3, labels.size = 0.5)
-
-
 # Map for February 16 (after storm)
 afterstorm <- tm_shape(nightlight_16_crop) +
   tm_raster(col.scale = tm_scale_continuous(values = 'inferno'),
-            col.legend = tm_legend(show = TRUE, 
-                                   title = 'Night light intensity after storm',
-                                   title.size = 1,
+            col.legend = tm_legend(title = 'Night light intensity after storm',
+                                   title.size = 0.8,
                                    orientation = 'landscape',
-                                   width = 35,
-                                   height = 3)) +
+                                   width = 30,
+                                   height = 2.5)) +
   tm_title('Houston Night Lights\nFebruary 16, 2021 (After storm)',
-           size = 1.2, fontface = 'bold') +
-  tm_compass(position = c('left', 'bottom'),
-             type = 'arrow',
-             size = 2.5,
-             text.size = 0.7,
-             color.dark = 'grey50',
-             text.color = 'white') +  
-  tm_scalebar(position = c('left', 'bottom'),
-              text.size = 0.8,
-              color.dark = 'grey50',
-              text.color = 'white') +  
+           size = 1, fontface = 'bold') +
   tm_layout(bg.color = 'white',           
             outer.bg.color = 'white',      
-            frame = TRUE,
-            legend.show = TRUE) +
+            frame = FALSE,
+            legend.frame = FALSE) +
   tm_graticules(x.show = TRUE, y.show = FALSE, lwd = 0.2, col = "white", alpha = 0.3, labels.size = 0.5)
 
 tmap_arrange(beforestorm, afterstorm, ncol = 2)
@@ -464,10 +438,8 @@ tm_basemap('CartoDB.VoyagerNoLabels') +
             legend.outside.position = 'right',
             legend.bg.color = 'white',
             legend.bg.alpha = 0.8) +
-  tm_compass(position = c('right', 'bottom'),
-             type = 'arrow',
-             size = 1) +
-  tm_scalebar(position = c('left', 'top'),
+  tm_graticules(lwd = 0.2, alpha = 0.3, labels.size = 0.5) +
+  tm_scalebar(position = c('right', 'bottom'),
               text.size = 0.8)
   
 ```
