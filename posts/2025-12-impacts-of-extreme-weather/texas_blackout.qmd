@@ -63,6 +63,14 @@ VIIRS data is distributed through NASA’s [Level-1 and Atmospheric Archive & Di
 
 -   The socioecoomic data were obtained from the [U.S. Census Bureau’s American Community Survey](https://www.census.gov/programs-surveys/acs) for census tracts in 2019.
 
+## Data citation
+
+NASA Worldview. (n.d.). NASA Worldview application. NASA Earth Science Data and Information System (EOSDIS). Retrieved October 25, 2025, from https://worldview.earthdata.nasa.gov/
+
+Geofabrik GmbH. (n.d.). Geofabrik OpenStreetMap data extracts. Retrieved October 25, 2025, from https://download.geofabrik.de/
+
+U.S. Census Bureau. (n.d.). American Community Survey (ACS). Retrieved October 25, 2025, from https://www.census.gov/programs-surveys/acs
+
 ## Data analysis process
 
 To assess the impacts of Winter Storm Uri on Houston communities, a multi-step approach combining spatial and socioeconomic data was adopted. This allowed us to identify areas affected by power outages, estimate the number of homes impacted, and examine patterns across different socioeconomic groups. The major steps of the analysis are summarized below:
@@ -272,21 +280,18 @@ We visualize the spatial extent of power outages across Houston by mapping the b
 #| fig-cap: "The figure shows the spatial distribution of power outages in Houston, highlighting areas impacted by blackout."
 
 # Visualize the blackout in Houston
-tm_basemap('OpenStreetMap') +
+tm_basemap("OpenStreetMap") +
   tm_shape(blackout_far) +
-    tm_polygons(fill = 'ivory', fill_alpha = 0.8, col = 'black') +
-    tm_title('Blackout areas in Houston', fontface = 'bold', size = 1) +
-    tm_layout(legend.show = TRUE) +
-    tm_scalebar(position = c('left', 'bottom')) +
-    tm_compass(position = c('right', 'top')) +
+    tm_polygons(fill = "ivory", fill_alpha = 0.8, col = "black") +
+  tm_title("Blackout areas in Houston", fontface = "bold", size = 1) +
+  tm_scalebar(position = c("left", "bottom")) +
   tm_graticules(lwd = 0.2, alpha = 0.3, labels.size = 0.5) +
-  tm_add_legend(labels = c("Blackout Areas"),
-              fill = c('black'),      
-              type = 'polygons',
-              position = c('left', 'top'))
+  tm_add_legend(type = "polygons", labels = "Blackout Areas", fill = "black") +
+  tm_layout(legend.outside = TRUE, legend.outside.position = "right")
 
 ```
-
+  
+  
 ## Identify number of homes impacted by power outage
 
 We estimate the number of homes in Houston that lost power during the February 2021 winter storms. By identifying which building footprints intersect with the blackout mask, the analysis isolates the homes likely affected by outages. Converting buildings to centroids allows for precise spatial calculations and comparisons between impacted and non-impacted houses, resulting in an estimated total of approximately 157,970 homes without power.
@@ -351,8 +356,6 @@ kbl(houses_df,
 Plot map for the houses that were impacted by the power outage.
 
 ```{r}
-#| fig-width: 6
-#| fig-height: 6
 #| label: fig-impacted-house
 #| fig-cap: "This map visualizes the spatial distribution of homes in Houston that lost power during the February 2021 winter storms. Impacted houses are highlighted in red, while unaffected houses are shown in blue, allowing for a clear comparison of affected versus unaffected areas across the city. The map provides a detailed spatial perspective on the extent of the blackout and helps identify which neighborhoods were most impacted."
 
@@ -374,11 +377,9 @@ tm_basemap('OpenStreetMap') +
                 col = c('firebrick', 'midnightblue'),
                 alpha = c(0.2, 0.7, 0.5),
                 title = 'Legend') +
+  tm_graticules(lwd = 0.2, alpha = 0.3, labels.size = 0.5) +
   tm_scalebar(position = c('left', 'bottom'),
-              text.size = 0.6) +
-  tm_compass(position = c('right', 'bottom'),
-             type = '4star',
-             size = 2)
+              text.size = 0.6)
 
 ```
 
@@ -505,10 +506,3 @@ This analysis used satellite nighttime light data to identify which parts of Hou
 
 While blackout exposure appeared similar across income levels, the ability to cope with and recover from outages is not equal. Low income communities have fewer resources to stay warm, relocate or rebound after a long outage. This difference between exposure and impact is important for understanding who is most vulnerable during extreme weather events. Future work should use nighttime light data from more days to better track outage duration and recovery. Adding other socioeconomic information, such as age, housing quality, or access to transportation, can improve our understanding of community vulnerability. Combining multiple sources like utility outage records, mobile phone mobility data and satellite imagery would create a more complete picture of who was affected and how. Examining infrastructure characteristics, such as the age of power lines or the placement of substations, may also help explain differences in recovery across neighborhoods. Together, these steps can help identify communities at higher risk and support more effective and equitable preparation for future extreme weather events.
 
-# Data source
-
-NASA Worldview. (n.d.). NASA Worldview application. NASA Earth Science Data and Information System (EOSDIS). Retrieved October 25, 2025, from https://worldview.earthdata.nasa.gov/
-
-Geofabrik GmbH. (n.d.). Geofabrik OpenStreetMap data extracts. Retrieved October 25, 2025, from https://download.geofabrik.de/
-
-U.S. Census Bureau. (n.d.). American Community Survey (ACS). Retrieved October 25, 2025, from https://www.census.gov/programs-surveys/acs
