@@ -52,7 +52,7 @@ These issues reflect broader patterns in biodiversity and forestry research, whe
 
 In the Year 3 forest carbon inventory, biases in measurement, metadata, procedural judgments, and misclassification directly affected the carbon stock estimates (Burt et al., 2020; Konno et al., 2024; Zvereva & Kozlov, 2021). Inflated or biologically implausible values could have led to inaccurate REDD+ carbon accounting, misinformed management decisions, and unreliable performance reports. These errors also risked undermining donor trust, misallocating conservation resources, and weakening the long-term credibility of the forest monitoring system.
 
-![Source: breadfruitonline.com, Enhancing global carbon dioxide mitigation through forest carbon sequestration](forest-carbon-sequestration.png)
+![*Source: breadfruitonline.com, Enhancing global carbon dioxide mitigation through forest carbon sequestration*](forest-carbon-sequestration.png)
 
 ## Insights from forest carbon monitoring
 
