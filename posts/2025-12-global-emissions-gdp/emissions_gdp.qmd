@@ -15,7 +15,6 @@ citation:
 categories: [MEDS, R, environment modeling, statistics, data science]
 image: emissions.jpg
 draft: false
-#bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
