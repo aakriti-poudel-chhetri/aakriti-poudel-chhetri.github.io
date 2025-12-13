@@ -21,7 +21,7 @@ Link to GitHub repository: https://github.com/aakriti-poudel-chhetri/impacts-of-
 
 # Background
 
-From February 13 to 17, 2021, Winter Storm Uri brought unusually cold temperatures, heavy snowfall, ice and freezing rain across Texas. Many places experienced their coldest conditions in more than three decades. The state’s power infrastructure was not designed for such extreme cold, therefore numerous power plants and grid components froze or malfunctioned. At the same time, electricity demand surged as residents attempted to heat their homes, placing severe pressure on the power system. To avoid a complete grid failure, authorities implemented rolling blackouts that were intended to last about an hour, but in reality many households lost electricity for several hours or even longer. An estimated 4.5 million homes experienced outages. These disruptions triggered additional problems, including widespread water and food shortages, burst pipes, and a lack of indoor heating. At least 246 deaths were linked directly or indirectly to the storm. Economic losses exceeded \$195 billion, making Winter Storm Uri the expensive natural disaster in Texas history@zhou2024.
+From February 13 to 17, 2021, Winter Storm Uri brought unusually cold temperatures, heavy snowfall, ice and freezing rain across Texas. Many places experienced their coldest conditions in more than three decades. The state’s power infrastructure was not designed for such extreme cold, therefore numerous power plants and grid components froze or malfunctioned. At the same time, electricity demand surged as residents attempted to heat their homes, placing severe pressure on the power system. To avoid a complete grid failure, authorities implemented rolling blackouts that were intended to last about an hour, but in reality many households lost electricity for several hours or even longer. An estimated 4.5 million homes experienced outages. These disruptions triggered additional problems, including widespread water and food shortages, burst pipes, and a lack of indoor heating. At least 246 deaths were linked directly or indirectly to the storm. Economic losses exceeded \$195 billion, making Winter Storm Uri the expensive natural disaster in Texas history[@zhou2024].
 
 Understanding how communities were affected is crucial for preparing for future extreme weather events. It can help identify which neighborhoods are most vulnerable and guide decisions about where to focus recovery and emergency resources.
 
@@ -41,7 +41,7 @@ This study also addresses the following sub-questions:
 
 # Data
 
-## Data source
+## Data description
 
 For this analysis, data were extracted from the multiple sources.
 
@@ -499,8 +499,16 @@ ggplot(census_blackout_col %>% filter(!is.na(B19013e1)), # Remove NA values
 
 # Conclusion
 
-This analysis used satellite nighttime light data to identify which parts of Houston lost power during Winter Storm Uri and how these outages related to neighborhood income levels. Surprisingly, the results showed that higher income census tracts appeared slightly more affected, even though past research, including @lee2022, found that low income and minority communities experienced more severe and prolonged outages. This difference likely comes from limitations in our dataset. Wealthier neighborhoods often have more outdoor lighting, which can make blackout detection less accurate. Census tract data also hides smaller neighborhood differences, and highway lighting or cloud cover may have caused some areas to be misclassified. In addition, assuming all buildings were residential and using a 200-meter buffer around highways may have excluded areas that actually lost power. Our analysis estimated that about 157,967 residential buildings lost electricity. However, because only two days of satellite data were used, the results may not capture the full timeline of outages. A longer range of dates would make it easier to see where and when blackouts occurred, and provide a clearer picture of storm impacts.
+This analysis used satellite nighttime light data to identify which parts of Houston lost power during Winter Storm Uri and how these outages related to neighborhood income levels. Surprisingly, the results showed that higher income census tracts appeared slightly more affected, even though past research, including [@lee2022] found that low income and minority communities experienced more severe and prolonged outages. This difference likely comes from limitations in our dataset. Wealthier neighborhoods often have more outdoor lighting, which can make blackout detection less accurate. Census tract data also hides smaller neighborhood differences, and highway lighting or cloud cover may have caused some areas to be misclassified. In addition, assuming all buildings were residential and using a 200-meter buffer around highways may have excluded areas that actually lost power. Our analysis estimated that about 157,967 residential buildings lost electricity. However, because only two days of satellite data were used, the results may not capture the full timeline of outages. A longer range of dates would make it easier to see where and when blackouts occurred, and provide a clearer picture of storm impacts.
 
 # Next steps
 
 While blackout exposure appeared similar across income levels, the ability to cope with and recover from outages is not equal. Low income communities have fewer resources to stay warm, relocate or rebound after a long outage. This difference between exposure and impact is important for understanding who is most vulnerable during extreme weather events. Future work should use nighttime light data from more days to better track outage duration and recovery. Adding other socioeconomic information, such as age, housing quality, or access to transportation, can improve our understanding of community vulnerability. Combining multiple sources like utility outage records, mobile phone mobility data and satellite imagery would create a more complete picture of who was affected and how. Examining infrastructure characteristics, such as the age of power lines or the placement of substations, may also help explain differences in recovery across neighborhoods. Together, these steps can help identify communities at higher risk and support more effective and equitable preparation for future extreme weather events.
+
+# Data source
+
+NASA Worldview. (n.d.). NASA Worldview application. NASA Earth Science Data and Information System (EOSDIS). Retrieved October 25, 2025, from https://worldview.earthdata.nasa.gov/
+
+Geofabrik GmbH. (n.d.). Geofabrik OpenStreetMap data extracts. Retrieved October 25, 2025, from https://download.geofabrik.de/
+
+U.S. Census Bureau. (n.d.). American Community Survey (ACS). Retrieved October 25, 2025, from https://www.census.gov/programs-surveys/acs
