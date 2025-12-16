@@ -1,6 +1,5 @@
 ---
-title: "Identifying the impacts of extreme weather"
-description: "A case study of Houston, Texas"
+title: "Assessing the power loss and social vulnerability during winter storm in Houston Texas"
 author:
   - name: Aakriti Poudel
     url: https://aakriti-poudel-chhetri.github.io/
@@ -21,7 +20,11 @@ Link to GitHub repository: https://github.com/aakriti-poudel-chhetri/impacts-of-
 
 # Background
 
-From February 13 to 17, 2021, Winter Storm Uri brought unusually cold temperatures, heavy snowfall, ice and freezing rain across Texas. Many places experienced their coldest conditions in more than three decades. The state’s power infrastructure was not designed for such extreme cold, therefore numerous power plants and grid components froze or malfunctioned. At the same time, electricity demand surged as residents attempted to heat their homes, placing severe pressure on the power system. To avoid a complete grid failure, authorities implemented rolling blackouts that were intended to last about an hour, but in reality many households lost electricity for several hours or even longer. An estimated 4.5 million homes experienced outages. These disruptions triggered additional problems, including widespread water and food shortages, burst pipes, and a lack of indoor heating. At least 246 deaths were linked directly or indirectly to the storm. Economic losses exceeded \$195 billion, making Winter Storm Uri the expensive natural disaster in Texas history[@zhou2024].
+On February from 13 to 17 of 2021, Winter Storm Uri brought unusually cold temperatures, heavy snowfall, ice and freezing rain across Texas. Many places in Texas experienced severe weather after more than three decades. Electricity demand surged as residents attempted to heat their homes, placing severe pressure on the power system.
+
+Texas operates on an independent power grid, and is largely disconnected from the rest of the United States. As a result, when widespread power outages happened during the Uri storm, Texas was unable to import electricity from neighboring states to stabilize their grid. The Texas power infrastructure was not designed for such extreme weather, therefore numerous power plants and grid components malfunctioned. This isolation magnified the scale and duration of power outages, leaving many without power and heat.
+
+To avoid a complete grid failure, authorities implemented rolling blackouts that were intended to last about an hour, but in reality many households lost electricity for several hours or even longer. An estimated 4.5 million homes experienced outages. These disruptions triggered additional problems, including widespread water and food shortages, burst pipes, and a lack of indoor heating. At least 246 deaths were linked directly or indirectly to the storm. Economic losses exceeded \$195 billion, making Winter Storm Uri the expensive natural disaster in Texas history [@zhou2024].
 
 Understanding how communities were affected is crucial for preparing for future extreme weather events. It can help identify which neighborhoods are most vulnerable and guide decisions about where to focus recovery and emergency resources.
 
@@ -165,6 +168,9 @@ nightlight_16_crop[(nightlight_16_crop > 1000) | (nightlight_16_crop <= 0)] <- N
 Here, we visualize the comparison between night-light intensities in Houston before and after the February 2021 winter storm. By mapping the February 7 (pre-storm) and February 16 (post-storm) night-light data side by side, the analysis shows areas where lighting and likely power availability changed, helping to identify regions affected by the blackout.
 
 ```{r}
+#| warning: false
+#| message: false
+
 #| label: fig-before-after
 #| fig-cap: "Comparison of Houston night light intensity before and after the winter storm, February 2021"
 
@@ -374,7 +380,9 @@ census_income <- census_tract %>% left_join(income_renamed, by = 'GEOID_Data')
 Let’s verify CRS. Verifying CRS alignment is essential for accurate spatial analysis, as mismatched projections can lead to incorrect geometry intersections, area calculations, or mapping errors.
 
 ```{r}
-#| warning: true
+#| output: false
+#| warning: false
+#| message: false
 
 # Check CRS of the dataset
 if(st_crs(census_income) == st_crs(houston_bbox)){
@@ -457,7 +465,7 @@ ggplot(census_blackout_col %>% filter(!is.na(B19013e1)), # Remove NA values
                               'FALSE' = 'No blackout')) +
   scale_fill_manual(values = c('TRUE' = 'firebrick',
                                'FALSE' = 'midnightblue'),
-                    labels = c('Blackout', 'No blackout')) +
+                    labels = c('No Blackout', 'Blackout')) +
   labs(title = 'Median household income for census tracts',
        subtitle = 'Blackout status in Houston census tracts',
        x = 'Blackout status',
