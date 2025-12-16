@@ -11,7 +11,7 @@ format:
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2025-12-impacts-of-extreme-weather/
 categories: [MEDS, R, GIS, geospatial, remote sensing, data science]
-image: before-after-storm.png
+image: nightlight-before-after.png
 draft: false
 bibliography: references.bib
 ---
@@ -170,6 +170,7 @@ Here, we visualize the comparison between night-light intensities in Houston bef
 ```{r}
 #| warning: false
 #| message: false
+#| output: false
 
 #| label: fig-before-after
 #| fig-cap: "Comparison of Houston night light intensity before and after the winter storm, February 2021"
@@ -183,26 +184,26 @@ beforestorm <- tm_shape(nightlight_07_crop) +
                                    title.size = 0.8,
                                    labels.size = 0.7,
                                    orientation = 'landscape',
-                                   width = 30,
+                                   width = 40,
                                    height = 2.5))+
   tm_title('Houston Night Lights\nFebruary 07, 2021 (Before storm)',
-           size = 1, fontface = 'bold') +
+           size = 1.5, fontface = 'bold') +
   tm_layout(bg.color = 'white',           
             outer.bg.color = 'white',
             frame = FALSE,
             legend.frame = FALSE) +
   tm_graticules(x.show = TRUE, y.show = FALSE, lwd = 0.2, col = "white", alpha = 0.3, labels.size = 0.5)
-  
+
 # Map for February 16 (after storm)
 afterstorm <- tm_shape(nightlight_16_crop) +
   tm_raster(col.scale = tm_scale_continuous(values = 'inferno'),
             col.legend = tm_legend(title = 'Night light intensity after storm',
                                    title.size = 0.8,
                                    orientation = 'landscape',
-                                   width = 30,
+                                   width = 40,
                                    height = 2.5)) +
   tm_title('Houston Night Lights\nFebruary 16, 2021 (After storm)',
-           size = 1, fontface = 'bold') +
+           size = 1.5, fontface = 'bold') +
   tm_layout(bg.color = 'white',           
             outer.bg.color = 'white',      
             frame = FALSE,
@@ -212,6 +213,10 @@ afterstorm <- tm_shape(nightlight_16_crop) +
 tmap_arrange(beforestorm, afterstorm, ncol = 2)
 
 ```
+
+Comparison of Houston night light intensity before and after the winter storm, February 2021
+
+![](nightlight-before-after.png)
 
 ## Identify the area with power outage
 
