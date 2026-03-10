@@ -1,6 +1,6 @@
 ---
 title: "The Chemistry in Beauty"
-description: "Uncovering the hidden hazards inside your cosmetic products — and what the data reveals about who is responsible"
+description: "**Uncovering the hidden hazards inside your cosmetic products, and what the data reveals about who is responsible**"
 author:
   - name: Aakriti Poudel
     url: https://aakriti-poudel-chhetri.github.io/
@@ -29,7 +29,7 @@ I wanted to make cosmetic safety feel real and accessible. Not a dry regulatory 
 
 **- Which brands expose consumers to the widest variety of harmful chemicals?**
 
-You can [explore the full dataset here](https://catalog.data.gov/dataset/chemicals-in-cosmetics-7d6ab)!
+You can [explore the full dataset here](https://catalog.data.gov/dataset/chemicals-in-cosmetics-d55bf)!
 
 
 ![](infographic.png)
