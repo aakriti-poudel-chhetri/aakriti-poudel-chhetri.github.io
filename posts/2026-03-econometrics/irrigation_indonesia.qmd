@@ -16,7 +16,7 @@ image: image/indonesia.png
 draft: false
 ---
 
-## [Repository Link](https://github.com/aakriti-poudel-chhetri/eds241-final-project)
+#### [Repository Link](https://github.com/aakriti-poudel-chhetri/eds241-final-project)
 
 ![](image/indonesia.png)
 
