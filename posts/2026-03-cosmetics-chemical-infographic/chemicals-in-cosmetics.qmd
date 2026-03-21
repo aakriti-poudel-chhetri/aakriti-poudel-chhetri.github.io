@@ -13,7 +13,7 @@ format:
 citation: 
   url: https://aakriti-poudel-chhetri.github.io/posts/2026-03-cosmetics-chemical-infographic/
 categories: [MEDS, Data-viz, Environmental Health, R, data science]
-image: infographic.png
+image: images/infographic.png
 draft: false
 ---
 
@@ -55,7 +55,6 @@ When I started exploring the data, one question kept coming up, which chemicals 
 
 In {ggplot}, I used `geom_tile()` to make the cards and added a small warning icon to each one. I kept everything simple, no axes, no gridlines, just the cards. You can see the chart from {ggplot} below.
 
-
 ![](images/chemicals.png)
 
 Then I moved into Affinity Designer, and made the **warning icon list** of the top five chemicals. The list keeps the ranking simple and readable. Each entry has the chemical name and the exact product count so the scale is immediately visible.
@@ -67,6 +66,7 @@ Once I knew which chemicals showed up the most, the next question was simple, wh
 Each bar has its own color from the Velvet Dawn palette I created for this project. The colors do not represent any data. They help keep the bars apart giving a clean look. I removed the grid and added labels at the end of each bar, so you can read the values directly without checking an axis.
 
 #### C. The luxury brands
+
 I wanted to check which luxury brands, the ones we trust the most and pay the most for, actually use the most harmful chemicals. The luxury brands were selected based on the popularity and market trend. I used a **Bubble chart**. To compute the layout, I used `circleProgressiveLayout()` from {packcircles}. To draw the circles as polygons in {ggplot2, I used `circleLayoutVertices()`. Each bubble gets its own color from the Velvet Dawn palette. The brand name sits at the center of each bubble along with the number of chemicals and products.
 
 In Affinity Designer, I styled the bubble chart to look like a blush palette. Each bubble is one brand, sized by number of reported products. Inside each bubble, you can see how many distinct harmful chemical types that brand uses and the number of products.
@@ -88,6 +88,7 @@ Every chart has a title or annotation. I removed all axis titles where the label
 The infographic opens with a plain statement of the problem. That sets the context before the reader look at chart. The definition of harmful chemicals is placed next to the top five chemical list. I put it there because that is exactly where a reader may ask “What does harmful chemicals mean?” The annotation is written next to each chart. This will make reader to understand right away.
 
 ### 3. Themes
+
 All charts use a my customized color palette as background in R. Once I moved to Affinity Designer, I added a soft pink floral background with decorative elements like flowers, leaves and makeup palette in the corners. The background gives the infographic a cosmetics feel without making it hard to read the data. The charts sit cleanly on top of it because their white backgrounds create enough contrast against the pink texture.
 
 ### 4. Colors
@@ -108,18 +109,21 @@ palette <- c(
   "brick"  = "#B85C5C"   # Dusty Brick Red
 )
 ```
+
 The palette is not perfectly colorblind friendly in every combination. But every key finding in the infographic is also written out directly as a label, annotation, or count. You can read every chart without relying on color at all.
 
 ### 5. Typography
 
-I used two fonts throughout the infographic.
-    - Jost for subheadings and paragraphs. It is clean and easy to read at small sizes.
-    
-    - Noteworthy for the title, labels, and annotations. It gives the infographic a handwritten, personal feel that fits the cosmetics theme.
+I used two fonts throughout the infographic. - Jost for subheadings and paragraphs. It is clean and easy to read at small sizes.
+
+```         
+- Noteworthy for the title, labels, and annotations. It gives the infographic a handwritten, personal feel that fits the cosmetics theme.
+```
 
 Jost was loaded in R using `font_add_google()` from {sysfonts} and activated with `showtext_auto()`. Noteworthy is in Affinity Designer.
 
 ### 6. General design
+
 You start with what chemicals are showing up the most, move to which companies are responsible, then see how luxury brands compare, and end with the popular brands treemap. Each section raises the next question naturally.
 
 The woman thinking "Which one to buy?" sits at the bottom left as the closing moment. After seeing all the data, that is the question every reader has on their mind.
@@ -127,23 +131,85 @@ The woman thinking "Which one to buy?" sits at the bottom left as the closing mo
 The luxury brand bubble chart was filtered to six brands selected based on market trends. The popular brands treemap was filtered to brands with more than 300 reported products, selected based on affordability and market trends.
 
 ### 7. Contextualizing the data
+
 The infographic opens with a clear statement of the problem. This helps readers understand why the data matters before they look at the charts. The short information of harmful chemicals is also stated directly in the infographic.
 
 ### 8. Main message
-The main message is harmful chemicals are common in cosmetics at every price level. Expensive luxury brands are not always cleaner, even though they cost more. At the same time, more affordable products also show surprising patterns.
-The woman thinking "Which one to buy?" at the bottom brings it back to the reader personally. Every chart tries to build the case.
+
+The main message is harmful chemicals are common in cosmetics at every price level. Expensive luxury brands are not always cleaner, even though they cost more. At the same time, more affordable products also show surprising patterns. The woman thinking "Which one to buy?" at the bottom brings it back to the reader personally. Every chart tries to build the case.
 
 ### 9. Accessibility
+
 The font sizes are large enough to read without zooming. All the key finding is backed up by explicit labels and counts, not just visual size or color. The bubble charts and treemap all have brand names, chemical counts, and product counts written directly on them so no finding depends on color or size alone. Alt text is provided for the infographic image.
 
 ### 10. DEI lens
+
 The data covers products reported to the CSCP between 2009 and 2020. It only reflects what companies chose to report. Some companies may have underreported, which means the real picture could be worse than what the data shows.
 
 The infographic is written for everyday shoppers, not scientists or regulators. The language is kept simple so anyone can read it and walk away knowing something useful about the products they buy.
 
 ## Reflections
+
 Expensive does not mean clean. Even when we pay more, the product likely contains at least one harmful chemical. For luxury brands, Dior leads with 6 chemical types and 367 reported products, more than Chanel, Givenchy, or Estee Lauder. Price is not a reliable signal of how safe a product is.
 
 The hardest part of this project was cleaning the brand names and deciding on the right visualization for each question. The raw dataset has 2,573 unique brand name entries. Same brand name has different entries such as "Parfums Chrisitian Dior", "Parfums Christain Dior", and "Parfums Christian Dior" with different typos. Collapsing those variants using `str_detect()` inside `case_when()` took more time than building any single chart.
 
-The cosmetics themed design came together in Affinity Designer after all the charts were built in R. Laying the makeup brush over the bar chart and styling the bubble and treemap charts as blush and eyeshadow palettes made the infographic visually appealing. 
+The cosmetics themed design came together in Affinity Designer after all the charts were built in R. Laying the makeup brush over the bar chart and styling the bubble and treemap charts as blush and eyeshadow palettes made the infographic visually appealing.
+
+## Explore the Code
+
+All visualizations were built in R using `{ggplot2}`, `{packcircles}`, `{ggtext}`, `{showtext}`, and `{glue}`. The full code is available in the expandable chunk below.
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+# Load packages
+library(janitor)
+library(scales)
+library(lubridate)
+library(tidyverse)
+library(showtext)
+library(sysfonts)
+library(glue)
+library(packcircles)
+library(ggtext)
+library(treemapify)
+library(here)
+
+# Import fonts
+font_add_google(name = "Jost", family = "jost")
+font_add(family  = "fa-brands",
+         regular = here::here("fonts", "Font Awesome 7 Brands-Regular-400.otf"))
+font_add(family  = "fa-solid",
+         regular = here::here("fonts", "Font Awesome 7 Free-Solid-900.otf"))
+
+showtext_auto()
+showtext_opts(dpi = 300)
+
+# Read data
+cscp_data <- read_csv(here::here("posts", "2026-03-cosmetics-chemical-infographic", "data", "cscpopendata.csv")) %>%
+  clean_names()
+
+# Data cleaning
+cscp_clean <- cscp_data %>%
+  mutate(
+    initial_date_reported     = mdy(initial_date_reported),
+    most_recent_date_reported = mdy(most_recent_date_reported),
+    discontinued_date         = mdy(discontinued_date),
+    chemical_created_at       = mdy(chemical_created_at),
+    chemical_updated_at       = mdy(chemical_updated_at),
+    chemical_date_removed     = mdy(chemical_date_removed)
+  ) %>%
+  mutate(
+    report_year  = year(initial_date_reported),
+    report_month = month(initial_date_reported, label = TRUE)
+  ) %>%
+  mutate(across(
+    c(primary_category, sub_category, chemical_name, company_name, brand_name),
+    str_trim
+  )) %>%
+  filter(!is.na(chemical_name))
+
+```
