@@ -59,6 +59,7 @@ suppressMessages({
 
 ```{r}
 #| warning: false
+#| message: false
 
 # Read in data
 irrigation <- read_csv(here::here("posts", "2026-03-econometrics", "data", "irrigation_data.csv"))
@@ -90,6 +91,7 @@ The four columns vary the specification in ways that test robustness. The baseli
 
 ```{r}
 #| warning: false
+#| message: false
 
 # Run a fixed effects OLS for `m3_c1` with province-specific linear trends.
 m3_c1 <- feols(
@@ -215,6 +217,7 @@ This next step splits the 201 districts into two groups based on per capita agri
 
 ```{r}
 #| warning: false
+#| message: false
 
 # Compute the sample median `agric_per_capita`
 med_agric <- median(irrigation$agric_per_capita, na.rm = TRUE)
