@@ -58,11 +58,7 @@ suppressMessages({
 ### Read in the dataset
 
 ```{r}
-# Gathering data from .dta file
-#raw_data <- read_dta("data/AJAE MS#19355-Data and Codes-Gatti/data.dta")
-
-# Create CSV from dta file
-# write.csv(raw_data, "data/irrigation_data.csv", row.names = FALSE)
+#| warning: false
 
 # Read in data
 irrigation <- read_csv(here::here("posts", "2026-03-econometrics", "data", "irrigation_data.csv"))
@@ -93,6 +89,7 @@ The four columns vary the specification in ways that test robustness. The baseli
 ## Replication of Table 3: The Effect of Growing-Season Rainfall and Irrigation Capacity on Conflict
 
 ```{r}
+#| warning: false
 
 # Run a fixed effects OLS for `m3_c1` with province-specific linear trends.
 m3_c1 <- feols(
@@ -217,6 +214,8 @@ Table 3 tells us that districts with more irrigation see less conflict during dr
 This next step splits the 201 districts into two groups based on per capita agricultural area planted to the three major staple crops: rice, corn, and cassava. The median value of `agric_per_capita` in the data is used as the cutoff: districts at or above the median are called agricultural districts, and those below the median are called non-agricultural districts. The paper uses per capita planted area rather than income because it is a more direct measure of how much a district depends on farming as a land use, and it is not affected by price fluctuations that could conflate agricultural dependence with wealth. The median was chosen as the dividing line rather than some arbitrary threshold because it splits the sample cleanly in half, giving a balanced comparison without assumptions about what counts as "enough" agriculture. The idea is simple: if irrigation is reducing conflict by protecting farm income, the effect should show up strongly in agricultural districts and should be weak or absent in non-agricultural ones. If irrigation reduced conflict in both types of districts equally, that would suggest the effect is not really about agriculture at all, but about something else that comes with irrigation, like economic development or better infrastructure.
 
 ```{r}
+#| warning: false
+
 # Compute the sample median `agric_per_capita`
 med_agric <- median(irrigation$agric_per_capita, na.rm = TRUE)
 
